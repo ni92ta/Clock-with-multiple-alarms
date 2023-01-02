@@ -1,0 +1,836 @@
+%CMF
+# %PSECTS Section
+# For each object file, details of its psects are enumerated here.
+# The begining of the section is indicated by %PSECTS.  The first
+# line indicates the name of the first object file, e.g.
+#    $foo.obj
+# Each line that follows describes a psect in that object file, until
+# the next object file.  The lines that describe a psect have the
+# format:
+#    <psect name> <class name> <space> <link address> <load addresses> <length> <delta>
+# All addresses and the length are given in unqualified hexadecimal
+# in delta units.  Any other numeric values are decimal.
+%PSECTS
+$C:\Users\843E~1\AppData\Local\Temp\s81s.obj
+end_init CODE 0 0 0 2 2
+config CONFIG 0 2007 2007 1 2
+$dist/default/production\LR5_9.X.production.obj
+cinit CODE 0 7E6 7E6 1A 2
+text1 CODE 0 4B6 4B6 330 2
+text2 CODE 0 DE1 DE1 1B 2
+text3 CODE 0 DFC DFC 1E 2
+text4 CODE 0 4 4 18 2
+text5 CODE 0 DB2 DB2 17 2
+text6 CODE 0 F72 F72 8E 2
+text7 CODE 0 17E 17E D2 2
+text8 CODE 0 C7 C7 B7 2
+text9 CODE 0 F04 F04 6E 2
+text10 CODE 0 D9F D9F 13 2
+text11 CODE 0 E5C E5C 4D 2
+text12 CODE 0 EA9 EA9 5B 2
+text13 CODE 0 E1A E1A 20 2
+text14 CODE 0 1C 1C AB 2
+text15 CODE 0 D8D D8D 12 2
+text16 CODE 0 DC9 DC9 18 2
+maintext CODE 0 250 250 266 2
+cstackBANK0 BANK0 1 20 20 43 1
+inittext CODE 0 D7D D7D 10 2
+bssBANK0 BANK0 1 63 63 C 1
+idataBANK1 CODE 0 E3A E3A 22 2
+swtext1 CONST 0 800 800 3E 2
+dataBANK1 BANK1 1 A0 A0 22 1
+# %UNUSED Section
+# This section enumerates the unused ranges of each CLASS. Each entry
+# is described on a single line as follows:
+#    <class name> <range> <delta>
+# Addresses given in the range are in hexadecimal and units of delta.
+%UNUSED
+RAM 6F-7D 1
+RAM C2-FD 1
+BANK0 6F-7D 1
+BANK1 C2-FD 1
+CONST 2-3 2
+CONST 83E-D7C 2
+ENTRY 2-3 2
+ENTRY 83E-D7C 2
+IDLOC 2000-2003 2
+STACK C2-FD 1
+CODE 2-3 2
+CODE 83E-D7C 2
+SFR0 0-1F 1
+SFR1 80-9F 1
+SFR2 100-17D 1
+SFR3 180-1FD 1
+STRCODE 2-3 2
+STRCODE 83E-D7C 2
+STRING 2-3 2
+STRING 83E-D7C 2
+# %LINETAB Section
+# This section enumerates the file/line to address mappings.
+# The beginning of the section is indicated by %LINETAB.
+# The first line indicates the name of the first object file, e.g.
+#   $foo.obj
+# Each line that follows describes a single mapping until the next
+# object file.  Mappings have the following format:
+#    <address> <psect name> <class name> ><line number>:<file name>
+# The address is absolute and given given in unqualified hex 
+# in delta units of the psect. All mappings within an object file
+# are in ascending order of addresses.
+# All other numeric values are in decimal.
+%LINETAB
+$dist/default/production\LR5_9.X.production.obj
+7E6 cinit CODE >367:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7E6 cinit CODE >370:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7E6 cinit CODE >423:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7E7 cinit CODE >424:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7E8 cinit CODE >425:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7E9 cinit CODE >426:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7EA cinit CODE >427:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7EB cinit CODE >428:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7EC cinit CODE >429:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7ED cinit CODE >430:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7EE cinit CODE >431:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7EF cinit CODE >432:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7F1 cinit CODE >436:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7F2 cinit CODE >437:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7F3 cinit CODE >438:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7F4 cinit CODE >439:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7F5 cinit CODE >440:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7F6 cinit CODE >441:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7F7 cinit CODE >442:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7F8 cinit CODE >443:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7F9 cinit CODE >444:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7FA cinit CODE >445:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7FB cinit CODE >446:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7FC cinit CODE >447:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7FD cinit CODE >453:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7FD cinit CODE >455:C:\Users\843E~1\AppData\Local\Temp\s81s.
+7FE cinit CODE >456:C:\Users\843E~1\AppData\Local\Temp\s81s.
+DC9 text16 CODE >7:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+DC9 text16 CODE >10:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+D8D text15 CODE >12:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+D90 text15 CODE >14:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+D92 text15 CODE >15:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+D97 text15 CODE >16:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+D98 text15 CODE >17:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+D99 text15 CODE >18:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+D9B text15 CODE >19:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+D9E text15 CODE >20:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+1C text14 CODE >22:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+1C text14 CODE >24:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+26 text14 CODE >25:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+2D text14 CODE >26:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+37 text14 CODE >28:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+3E text14 CODE >29:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+45 text14 CODE >31:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+4C text14 CODE >32:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+53 text14 CODE >35:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+5A text14 CODE >37:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+61 text14 CODE >40:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+68 text14 CODE >41:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+6F text14 CODE >44:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+76 text14 CODE >45:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+81 text14 CODE >49:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+88 text14 CODE >50:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+8F text14 CODE >52:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+96 text14 CODE >53:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+9D text14 CODE >55:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+A4 text14 CODE >56:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+AB text14 CODE >59:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+B2 text14 CODE >60:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+B9 text14 CODE >62:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+C0 text14 CODE >64:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+C6 text14 CODE >65:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+E1A text13 CODE >86:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+E1D text13 CODE >88:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+E1E text13 CODE >89:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+E27 text13 CODE >91:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+E33 text13 CODE >92:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+E39 text13 CODE >89:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+EA9 text12 CODE >6:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EA9 text12 CODE >14:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EAC text12 CODE >15:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EAE text12 CODE >16:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EB3 text12 CODE >17:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EB5 text12 CODE >19:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EB7 text12 CODE >20:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EBC text12 CODE >21:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EC0 text12 CODE >23:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EC2 text12 CODE >24:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EC6 text12 CODE >25:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EC8 text12 CODE >26:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+ECA text12 CODE >27:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+ED1 text12 CODE >28:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+ED5 text12 CODE >26:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+ED6 text12 CODE >31:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EDD text12 CODE >32:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EE5 text12 CODE >33:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EEB text12 CODE >34:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EEC text12 CODE >36:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EF3 text12 CODE >37:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EF7 text12 CODE >39:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EFA text12 CODE >40:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+EFF text12 CODE >41:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awdiv.c
+E5C text11 CODE >6:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E5C text11 CODE >13:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E5F text11 CODE >14:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E61 text11 CODE >15:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E66 text11 CODE >16:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E68 text11 CODE >18:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E6A text11 CODE >19:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E6F text11 CODE >20:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E73 text11 CODE >21:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E75 text11 CODE >22:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E77 text11 CODE >23:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E7E text11 CODE >24:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E82 text11 CODE >22:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E83 text11 CODE >27:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E8B text11 CODE >28:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E91 text11 CODE >29:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E98 text11 CODE >30:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E9C text11 CODE >32:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+E9F text11 CODE >33:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+EA4 text11 CODE >34:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+D9F text10 CODE >4:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul8.c
+DA2 text10 CODE >6:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul8.c
+DA3 text10 CODE >43:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul8.c
+DA5 text10 CODE >44:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul8.c
+DA9 text10 CODE >45:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul8.c
+DAB text10 CODE >46:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul8.c
+DAD text10 CODE >47:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul8.c
+DB0 text10 CODE >50:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul8.c
+F04 text9 CODE >62:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F04 text9 CODE >64:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F0E text9 CODE >65:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F15 text9 CODE >67:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F19 text9 CODE >68:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F21 text9 CODE >66:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F26 text9 CODE >71:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F2A text9 CODE >72:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F34 text9 CODE >73:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F3C text9 CODE >70:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F3C text9 CODE >74:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F41 text9 CODE >76:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F43 text9 CODE >77:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F4B text9 CODE >75:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F51 text9 CODE >79:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F53 text9 CODE >80:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F59 text9 CODE >81:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F5B text9 CODE >82:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F6D text9 CODE >83:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F70 text9 CODE >84:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+F71 text9 CODE >86:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+C7 text8 CODE >56:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+C7 text8 CODE >63:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+D8 text8 CODE >64:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+DF text8 CODE >65:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+EE text8 CODE >66:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+F5 text8 CODE >67:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+FB text8 CODE >68:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+100 text8 CODE >69:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+112 text8 CODE >70:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+124 text8 CODE >71:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+128 text8 CODE >72:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+129 text8 CODE >73:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+12F text8 CODE >74:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+130 text8 CODE >75:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+136 text8 CODE >76:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+13A text8 CODE >78:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+142 text8 CODE >79:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+14E text8 CODE >80:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+158 text8 CODE >81:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+159 text8 CODE >83:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+161 text8 CODE >84:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+165 text8 CODE >85:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+17E text7 CODE >62:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+17E text7 CODE >67:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+18F text7 CODE >68:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+196 text7 CODE >69:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+1A5 text7 CODE >70:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+1AC text7 CODE >71:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+1B1 text7 CODE >72:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+1C3 text7 CODE >73:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+1D5 text7 CODE >74:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+1D9 text7 CODE >75:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+1DA text7 CODE >77:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+1DB text7 CODE >78:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+1E1 text7 CODE >79:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+1E7 text7 CODE >134:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+1EB text7 CODE >136:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+1ED text7 CODE >137:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+1FB text7 CODE >138:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+203 text7 CODE >139:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+20B text7 CODE >140:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+20F text7 CODE >143:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+213 text7 CODE >145:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+215 text7 CODE >146:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+223 text7 CODE >147:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+22B text7 CODE >148:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+233 text7 CODE >149:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+237 text7 CODE >156:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+F72 text6 CODE >44:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+F72 text6 CODE >49:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+F83 text6 CODE >50:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+F8C text6 CODE >51:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+F9E text6 CODE >52:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+F9F text6 CODE >53:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FA5 text6 CODE >54:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FAC text6 CODE >55:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FAE text6 CODE >56:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FB0 text6 CODE >57:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FB5 text6 CODE >58:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FBE text6 CODE >60:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FC7 text6 CODE >61:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FCE text6 CODE >63:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FD2 text6 CODE >64:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FDB text6 CODE >66:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FE4 text6 CODE >67:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FE6 text6 CODE >65:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FE6 text6 CODE >68:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FE9 text6 CODE >70:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FEC text6 CODE >71:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+FF7 text6 CODE >72:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\fttol.c
+DB2 text5 CODE >28:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwtoft.c
+DB2 text5 CODE >30:C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwtoft.c
+4 text4 CODE >23:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4 text4 CODE >26:C:\Users\Никита\Desktop\LR5_9.X\main.c
+DFC text3 CODE >73:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+DFF text3 CODE >75:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+E00 text3 CODE >78:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+E05 text3 CODE >79:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+E06 text3 CODE >81:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+E0E text3 CODE >83:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+E0F text3 CODE >75:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+E19 text3 CODE >84:C:\Users\Никита\Desktop\LR5_9.X\lcd.c
+DE1 text2 CODE >30:C:\Users\Никита\Desktop\LR5_9.X\main.c
+DE4 text2 CODE >32:C:\Users\Никита\Desktop\LR5_9.X\main.c
+DE6 text2 CODE >33:C:\Users\Никита\Desktop\LR5_9.X\main.c
+DEB text2 CODE >34:C:\Users\Никита\Desktop\LR5_9.X\main.c
+DEC text2 CODE >35:C:\Users\Никита\Desktop\LR5_9.X\main.c
+DED text2 CODE >36:C:\Users\Никита\Desktop\LR5_9.X\main.c
+DF8 text2 CODE >37:C:\Users\Никита\Desktop\LR5_9.X\main.c
+DFB text2 CODE >38:C:\Users\Никита\Desktop\LR5_9.X\main.c
+800 swtext1 CONST >42:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4B6 text1 CODE >40:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4B6 text1 CODE >42:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4B7 text1 CODE >46:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4BE text1 CODE >48:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4C4 text1 CODE >49:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4CB text1 CODE >46:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4D2 text1 CODE >57:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4D8 text1 CODE >58:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4DF text1 CODE >59:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4E6 text1 CODE >61:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4ED text1 CODE >62:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4F4 text1 CODE >59:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4FB text1 CODE >70:C:\Users\Никита\Desktop\LR5_9.X\main.c
+500 text1 CODE >72:C:\Users\Никита\Desktop\LR5_9.X\main.c
+506 text1 CODE >73:C:\Users\Никита\Desktop\LR5_9.X\main.c
+50D text1 CODE >70:C:\Users\Никита\Desktop\LR5_9.X\main.c
+517 text1 CODE >75:C:\Users\Никита\Desktop\LR5_9.X\main.c
+51C text1 CODE >77:C:\Users\Никита\Desktop\LR5_9.X\main.c
+523 text1 CODE >78:C:\Users\Никита\Desktop\LR5_9.X\main.c
+52A text1 CODE >75:C:\Users\Никита\Desktop\LR5_9.X\main.c
+531 text1 CODE >86:C:\Users\Никита\Desktop\LR5_9.X\main.c
+536 text1 CODE >88:C:\Users\Никита\Desktop\LR5_9.X\main.c
+53C text1 CODE >89:C:\Users\Никита\Desktop\LR5_9.X\main.c
+543 text1 CODE >86:C:\Users\Никита\Desktop\LR5_9.X\main.c
+54D text1 CODE >91:C:\Users\Никита\Desktop\LR5_9.X\main.c
+552 text1 CODE >93:C:\Users\Никита\Desktop\LR5_9.X\main.c
+559 text1 CODE >94:C:\Users\Никита\Desktop\LR5_9.X\main.c
+560 text1 CODE >91:C:\Users\Никита\Desktop\LR5_9.X\main.c
+567 text1 CODE >102:C:\Users\Никита\Desktop\LR5_9.X\main.c
+56C text1 CODE >104:C:\Users\Никита\Desktop\LR5_9.X\main.c
+572 text1 CODE >105:C:\Users\Никита\Desktop\LR5_9.X\main.c
+579 text1 CODE >102:C:\Users\Никита\Desktop\LR5_9.X\main.c
+583 text1 CODE >107:C:\Users\Никита\Desktop\LR5_9.X\main.c
+588 text1 CODE >109:C:\Users\Никита\Desktop\LR5_9.X\main.c
+58F text1 CODE >110:C:\Users\Никита\Desktop\LR5_9.X\main.c
+596 text1 CODE >107:C:\Users\Никита\Desktop\LR5_9.X\main.c
+59D text1 CODE >118:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5A2 text1 CODE >120:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5A8 text1 CODE >121:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5AF text1 CODE >118:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5B9 text1 CODE >123:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5BE text1 CODE >125:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5C5 text1 CODE >126:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5CC text1 CODE >123:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5D3 text1 CODE >134:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5D8 text1 CODE >136:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5DE text1 CODE >137:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5E5 text1 CODE >134:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5EF text1 CODE >139:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5F4 text1 CODE >141:C:\Users\Никита\Desktop\LR5_9.X\main.c
+5FB text1 CODE >142:C:\Users\Никита\Desktop\LR5_9.X\main.c
+602 text1 CODE >139:C:\Users\Никита\Desktop\LR5_9.X\main.c
+609 text1 CODE >150:C:\Users\Никита\Desktop\LR5_9.X\main.c
+60E text1 CODE >152:C:\Users\Никита\Desktop\LR5_9.X\main.c
+614 text1 CODE >153:C:\Users\Никита\Desktop\LR5_9.X\main.c
+61B text1 CODE >150:C:\Users\Никита\Desktop\LR5_9.X\main.c
+625 text1 CODE >155:C:\Users\Никита\Desktop\LR5_9.X\main.c
+62A text1 CODE >157:C:\Users\Никита\Desktop\LR5_9.X\main.c
+631 text1 CODE >158:C:\Users\Никита\Desktop\LR5_9.X\main.c
+638 text1 CODE >155:C:\Users\Никита\Desktop\LR5_9.X\main.c
+63F text1 CODE >166:C:\Users\Никита\Desktop\LR5_9.X\main.c
+644 text1 CODE >168:C:\Users\Никита\Desktop\LR5_9.X\main.c
+64A text1 CODE >169:C:\Users\Никита\Desktop\LR5_9.X\main.c
+651 text1 CODE >166:C:\Users\Никита\Desktop\LR5_9.X\main.c
+65B text1 CODE >171:C:\Users\Никита\Desktop\LR5_9.X\main.c
+660 text1 CODE >173:C:\Users\Никита\Desktop\LR5_9.X\main.c
+667 text1 CODE >174:C:\Users\Никита\Desktop\LR5_9.X\main.c
+66E text1 CODE >171:C:\Users\Никита\Desktop\LR5_9.X\main.c
+675 text1 CODE >182:C:\Users\Никита\Desktop\LR5_9.X\main.c
+67A text1 CODE >184:C:\Users\Никита\Desktop\LR5_9.X\main.c
+680 text1 CODE >185:C:\Users\Никита\Desktop\LR5_9.X\main.c
+687 text1 CODE >182:C:\Users\Никита\Desktop\LR5_9.X\main.c
+691 text1 CODE >187:C:\Users\Никита\Desktop\LR5_9.X\main.c
+696 text1 CODE >189:C:\Users\Никита\Desktop\LR5_9.X\main.c
+69D text1 CODE >190:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6A4 text1 CODE >187:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6AB text1 CODE >198:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6B0 text1 CODE >200:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6B6 text1 CODE >201:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6BD text1 CODE >198:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6C7 text1 CODE >203:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6CC text1 CODE >205:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6D3 text1 CODE >206:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6DA text1 CODE >203:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6E1 text1 CODE >214:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6E6 text1 CODE >216:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6EC text1 CODE >217:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6F3 text1 CODE >214:C:\Users\Никита\Desktop\LR5_9.X\main.c
+6FD text1 CODE >219:C:\Users\Никита\Desktop\LR5_9.X\main.c
+702 text1 CODE >221:C:\Users\Никита\Desktop\LR5_9.X\main.c
+709 text1 CODE >222:C:\Users\Никита\Desktop\LR5_9.X\main.c
+710 text1 CODE >219:C:\Users\Никита\Desktop\LR5_9.X\main.c
+717 text1 CODE >230:C:\Users\Никита\Desktop\LR5_9.X\main.c
+71C text1 CODE >232:C:\Users\Никита\Desktop\LR5_9.X\main.c
+722 text1 CODE >233:C:\Users\Никита\Desktop\LR5_9.X\main.c
+729 text1 CODE >230:C:\Users\Никита\Desktop\LR5_9.X\main.c
+733 text1 CODE >235:C:\Users\Никита\Desktop\LR5_9.X\main.c
+738 text1 CODE >237:C:\Users\Никита\Desktop\LR5_9.X\main.c
+73F text1 CODE >238:C:\Users\Никита\Desktop\LR5_9.X\main.c
+746 text1 CODE >235:C:\Users\Никита\Desktop\LR5_9.X\main.c
+74D text1 CODE >246:C:\Users\Никита\Desktop\LR5_9.X\main.c
+752 text1 CODE >248:C:\Users\Никита\Desktop\LR5_9.X\main.c
+758 text1 CODE >249:C:\Users\Никита\Desktop\LR5_9.X\main.c
+75F text1 CODE >246:C:\Users\Никита\Desktop\LR5_9.X\main.c
+769 text1 CODE >251:C:\Users\Никита\Desktop\LR5_9.X\main.c
+76E text1 CODE >253:C:\Users\Никита\Desktop\LR5_9.X\main.c
+775 text1 CODE >254:C:\Users\Никита\Desktop\LR5_9.X\main.c
+77C text1 CODE >251:C:\Users\Никита\Desktop\LR5_9.X\main.c
+783 text1 CODE >262:C:\Users\Никита\Desktop\LR5_9.X\main.c
+788 text1 CODE >264:C:\Users\Никита\Desktop\LR5_9.X\main.c
+78E text1 CODE >265:C:\Users\Никита\Desktop\LR5_9.X\main.c
+795 text1 CODE >262:C:\Users\Никита\Desktop\LR5_9.X\main.c
+79F text1 CODE >267:C:\Users\Никита\Desktop\LR5_9.X\main.c
+7A4 text1 CODE >269:C:\Users\Никита\Desktop\LR5_9.X\main.c
+7AB text1 CODE >270:C:\Users\Никита\Desktop\LR5_9.X\main.c
+7B2 text1 CODE >267:C:\Users\Никита\Desktop\LR5_9.X\main.c
+7B9 text1 CODE >278:C:\Users\Никита\Desktop\LR5_9.X\main.c
+7BE text1 CODE >280:C:\Users\Никита\Desktop\LR5_9.X\main.c
+7C4 text1 CODE >281:C:\Users\Никита\Desktop\LR5_9.X\main.c
+7CB text1 CODE >278:C:\Users\Никита\Desktop\LR5_9.X\main.c
+7D2 text1 CODE >42:C:\Users\Никита\Desktop\LR5_9.X\main.c
+7E5 text1 CODE >285:C:\Users\Никита\Desktop\LR5_9.X\main.c
+250 maintext CODE >287:C:\Users\Никита\Desktop\LR5_9.X\main.c
+250 maintext CODE >289:C:\Users\Никита\Desktop\LR5_9.X\main.c
+258 maintext CODE >291:C:\Users\Никита\Desktop\LR5_9.X\main.c
+259 maintext CODE >292:C:\Users\Никита\Desktop\LR5_9.X\main.c
+25A maintext CODE >293:C:\Users\Никита\Desktop\LR5_9.X\main.c
+25E maintext CODE >294:C:\Users\Никита\Desktop\LR5_9.X\main.c
+261 maintext CODE >295:C:\Users\Никита\Desktop\LR5_9.X\main.c
+264 maintext CODE >296:C:\Users\Никита\Desktop\LR5_9.X\main.c
+265 maintext CODE >297:C:\Users\Никита\Desktop\LR5_9.X\main.c
+266 maintext CODE >298:C:\Users\Никита\Desktop\LR5_9.X\main.c
+267 maintext CODE >299:C:\Users\Никита\Desktop\LR5_9.X\main.c
+268 maintext CODE >300:C:\Users\Никита\Desktop\LR5_9.X\main.c
+26B maintext CODE >301:C:\Users\Никита\Desktop\LR5_9.X\main.c
+26C maintext CODE >302:C:\Users\Никита\Desktop\LR5_9.X\main.c
+26D maintext CODE >303:C:\Users\Никита\Desktop\LR5_9.X\main.c
+270 maintext CODE >304:C:\Users\Никита\Desktop\LR5_9.X\main.c
+273 maintext CODE >307:C:\Users\Никита\Desktop\LR5_9.X\main.c
+27E maintext CODE >309:C:\Users\Никита\Desktop\LR5_9.X\main.c
+289 maintext CODE >310:C:\Users\Никита\Desktop\LR5_9.X\main.c
+292 maintext CODE >307:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2A1 maintext CODE >312:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2AC maintext CODE >314:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2B7 maintext CODE >315:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2C6 maintext CODE >312:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2D5 maintext CODE >317:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2DB maintext CODE >322:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2DE maintext CODE >323:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2E0 maintext CODE >324:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2E7 maintext CODE >325:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2EA maintext CODE >326:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2EB maintext CODE >327:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2F6 maintext CODE >328:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2F9 maintext CODE >329:C:\Users\Никита\Desktop\LR5_9.X\main.c
+2FA maintext CODE >330:C:\Users\Никита\Desktop\LR5_9.X\main.c
+305 maintext CODE >331:C:\Users\Никита\Desktop\LR5_9.X\main.c
+319 maintext CODE >332:C:\Users\Никита\Desktop\LR5_9.X\main.c
+34A maintext CODE >333:C:\Users\Никита\Desktop\LR5_9.X\main.c
+37B maintext CODE >334:C:\Users\Никита\Desktop\LR5_9.X\main.c
+37F maintext CODE >338:C:\Users\Никита\Desktop\LR5_9.X\main.c
+383 maintext CODE >339:C:\Users\Никита\Desktop\LR5_9.X\main.c
+388 maintext CODE >340:C:\Users\Никита\Desktop\LR5_9.X\main.c
+38B maintext CODE >341:C:\Users\Никита\Desktop\LR5_9.X\main.c
+38C maintext CODE >342:C:\Users\Никита\Desktop\LR5_9.X\main.c
+38D maintext CODE >344:C:\Users\Никита\Desktop\LR5_9.X\main.c
+3A2 maintext CODE >345:C:\Users\Никита\Desktop\LR5_9.X\main.c
+3B7 maintext CODE >346:C:\Users\Никита\Desktop\LR5_9.X\main.c
+3BB maintext CODE >347:C:\Users\Никита\Desktop\LR5_9.X\main.c
+3D9 maintext CODE >348:C:\Users\Никита\Desktop\LR5_9.X\main.c
+3F7 maintext CODE >350:C:\Users\Никита\Desktop\LR5_9.X\main.c
+3FB maintext CODE >358:C:\Users\Никита\Desktop\LR5_9.X\main.c
+3FF maintext CODE >375:C:\Users\Никита\Desktop\LR5_9.X\main.c
+40B maintext CODE >376:C:\Users\Никита\Desktop\LR5_9.X\main.c
+416 maintext CODE >387:C:\Users\Никита\Desktop\LR5_9.X\main.c
+417 maintext CODE >391:C:\Users\Никита\Desktop\LR5_9.X\main.c
+41B maintext CODE >392:C:\Users\Никита\Desktop\LR5_9.X\main.c
+420 maintext CODE >393:C:\Users\Никита\Desktop\LR5_9.X\main.c
+423 maintext CODE >394:C:\Users\Никита\Desktop\LR5_9.X\main.c
+424 maintext CODE >395:C:\Users\Никита\Desktop\LR5_9.X\main.c
+425 maintext CODE >396:C:\Users\Никита\Desktop\LR5_9.X\main.c
+43B maintext CODE >397:C:\Users\Никита\Desktop\LR5_9.X\main.c
+442 maintext CODE >398:C:\Users\Никита\Desktop\LR5_9.X\main.c
+45A maintext CODE >399:C:\Users\Никита\Desktop\LR5_9.X\main.c
+47B maintext CODE >400:C:\Users\Никита\Desktop\LR5_9.X\main.c
+49C maintext CODE >401:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4A3 maintext CODE >402:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4AA maintext CODE >403:C:\Users\Никита\Desktop\LR5_9.X\main.c
+4B5 maintext CODE >319:C:\Users\Никита\Desktop\LR5_9.X\main.c
+D7D inittext CODE >397:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D7D inittext CODE >398:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D7E inittext CODE >399:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D7F inittext CODE >400:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D80 inittext CODE >401:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D81 inittext CODE >408:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D81 inittext CODE >409:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D83 inittext CODE >410:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D84 inittext CODE >411:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D85 inittext CODE >412:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D86 inittext CODE >413:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D87 inittext CODE >414:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D88 inittext CODE >415:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D89 inittext CODE >416:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D8A inittext CODE >417:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D8B inittext CODE >418:C:\Users\843E~1\AppData\Local\Temp\s81s.
+D8C inittext CODE >419:C:\Users\843E~1\AppData\Local\Temp\s81s.
+# %SYMTAB Section
+# An enumeration of all symbols in the program.
+# The beginning of the section is indicated by %SYMTAB.
+# Each line describes a single symbol as follows:
+#    <label> <value> [-]<load-adj> <class> <space> <psect> <file-name>
+# The value and load-adj are both in unqualified hexadecimal.
+# All other numeric values are in decimal.  The load-adj is the
+# quantity one needs to add to the symbol value in order to obtain the load
+# address of the symbol.  This value may be signed. If the symbol
+# was defined in a psect then <psect> will be "-". File-name
+# is the name of the object file in which the symbol was defined.
+%SYMTAB
+_t 63 0 BANK0 1 bssBANK0 dist/default/production\LR5_9.X.production.obj
+_y 64 0 BANK0 1 bssBANK0 dist/default/production\LR5_9.X.production.obj
+___latbits 1 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+___awdiv@counter 25 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__LdataBANK1 0 0 ABS 0 dataBANK1 -
+__Hspace_0 2008 0 ABS 0 - -
+__Hspace_1 C2 0 ABS 0 - -
+__Hspace_2 0 0 ABS 0 - -
+__Hspace_3 0 0 ABS 0 - -
+__HidataBANK1 0 0 ABS 0 idataBANK1 -
+___ftdiv@exp 46 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+segchar@adc_data 2F 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+delay@i 20 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__Heeprom_data 0 0 EEDATA 3 eeprom_data -
+_GO FA 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+main@l 61 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__Hstrings 0 0 ABS 0 strings -
+_ADON F8 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_CHS0 FB 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_CHS1 FC 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_CHS2 FD 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+___sp 0 0 STACK 2 stack C:\Users\843E~1\AppData\Local\Temp\s81s.obj
+_main 4A0 0 CODE 0 maintext dist/default/production\LR5_9.X.production.obj
+btemp 7E 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+start 0 0 CODE 0 init C:\Users\843E~1\AppData\Local\Temp\s81s.obj
+__size_of___awdiv 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__size_of___awmod 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__size_of___ftdiv 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__size_of___ftmul 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__size_of___fttol 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__CFG_BOREN$OFF 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__size_of_main 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+sendbytee@mode 2B 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___ftdiv@f1 3B 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___ftdiv@f2 38 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___ftdiv@f3 43 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__LidataBANK1 0 0 ABS 0 idataBANK1 -
+_LCD_Init 38 0 CODE 0 text14 dist/default/production\LR5_9.X.production.obj
+__Hpowerup 0 0 CODE 0 powerup -
+___awmod@sign 2A 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+LCD_SetPos@x 25 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+LCD_SetPos@y 24 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__end_of_LCD_Init 18E 0 CODE 0 text14 dist/default/production\LR5_9.X.production.obj
+intlevel0 0 0 ENTRY 0 functab C:\Users\843E~1\AppData\Local\Temp\s81s.obj
+intlevel1 0 0 ENTRY 0 functab C:\Users\843E~1\AppData\Local\Temp\s81s.obj
+intlevel2 0 0 ENTRY 0 functab C:\Users\843E~1\AppData\Local\Temp\s81s.obj
+intlevel3 0 0 ENTRY 0 functab C:\Users\843E~1\AppData\Local\Temp\s81s.obj
+intlevel4 0 0 ENTRY 0 functab C:\Users\843E~1\AppData\Local\Temp\s81s.obj
+intlevel5 0 0 ENTRY 0 functab C:\Users\843E~1\AppData\Local\Temp\s81s.obj
+__size_of_segchar 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+___bmul@multiplicand 20 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+wtemp0 7E 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__Hfunctab 0 0 ENTRY 0 functab -
+___awdiv@sign 26 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__Hclrtext 0 0 ABS 0 clrtext -
+___ftmul@f1 28 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___ftmul@f2 2B 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___awdiv@dividend 22 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+_LCD_SetPos 1BF8 0 CODE 0 text3 dist/default/production\LR5_9.X.production.obj
+LCD_delay@i 20 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+_LCD_String 1C34 0 CODE 0 text13 dist/default/production\LR5_9.X.production.obj
+__end_of_sendbytee 1BF8 0 CODE 0 text2 dist/default/production\LR5_9.X.production.obj
+__size_of_sendbytee 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__end_of___bmul 1B64 0 CODE 0 text10 dist/default/production\LR5_9.X.production.obj
+___fttol@f1 48 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__Lmaintext 0 0 ABS 0 maintext -
+___bmul@multiplier 23 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___awdiv@divisor 20 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__size_of___ftpack 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__end_of___awdiv 1E08 0 CODE 0 text12 dist/default/production\LR5_9.X.production.obj
+__end_of___awmod 1D52 0 CODE 0 text11 dist/default/production\LR5_9.X.production.obj
+__end_of___ftdiv 2FC 0 CODE 0 text8 dist/default/production\LR5_9.X.production.obj
+__end_of___ftmul 4A0 0 CODE 0 text7 dist/default/production\LR5_9.X.production.obj
+__end_of___fttol 2000 0 CODE 0 text6 dist/default/production\LR5_9.X.production.obj
+_sendbytee 1BC2 0 CODE 0 text2 dist/default/production\LR5_9.X.production.obj
+__size_of_delay 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__size_of___lwtoft 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+start_initialization FCC 0 CODE 0 cinit dist/default/production\LR5_9.X.production.obj
+__end_of_segchar FCC 0 CODE 0 text1 dist/default/production\LR5_9.X.production.obj
+__end_of_LCD_SetPos 1C34 0 CODE 0 text3 dist/default/production\LR5_9.X.production.obj
+__end_of_LCD_String 1C74 0 CODE 0 text13 dist/default/production\LR5_9.X.production.obj
+sendbyte@mode 22 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__pcstackBANK0 20 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___fttol@exp1 55 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___fttol@lval 51 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+sendbytee@c 2E 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___ftpack 1E08 0 CODE 0 text9 dist/default/production\LR5_9.X.production.obj
+___ftpack@arg 20 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___ftpack@exp 23 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___int_sp 0 0 STACK 2 stack C:\Users\843E~1\AppData\Local\Temp\s81s.obj
+__end_of___ftpack 1EE4 0 CODE 0 text9 dist/default/production\LR5_9.X.production.obj
+__Hbank0 0 0 ABS 0 bank0 -
+__Hbank1 0 0 ABS 0 bank1 -
+__Hbank2 0 0 BANK2 1 bank2 -
+__Hbank3 0 0 BANK3 1 bank3 -
+__Hcinit 1000 0 CODE 0 cinit -
+__Hidloc 0 0 IDLOC 0 idloc -
+__end_of_LCD_delay 1BC2 0 CODE 0 text16 dist/default/production\LR5_9.X.production.obj
+__Hstack 0 0 STACK 2 stack -
+__size_of_LCD_delay 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__Hmaintext 0 0 ABS 0 maintext -
+__Hcommon 0 0 ABS 0 common -
+__Hconfig 4010 0 CONFIG 0 config -
+___lwtoft 1B64 0 CODE 0 text5 dist/default/production\LR5_9.X.production.obj
+__Lbank0 0 0 ABS 0 bank0 -
+__Lbank1 0 0 ABS 0 bank1 -
+__Lbank2 0 0 BANK2 1 bank2 -
+__Lbank3 0 0 BANK3 1 bank3 -
+__Lcinit FCC 0 CODE 0 cinit -
+__Lidloc 0 0 IDLOC 0 idloc -
+__Lstack 0 0 STACK 2 stack -
+__end_of___lwtoft 1B92 0 CODE 0 text5 dist/default/production\LR5_9.X.production.obj
+__Linittext 0 0 ABS 0 inittext -
+_PORTCbits 7 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_LCD_delay 1B92 0 CODE 0 text16 dist/default/production\LR5_9.X.production.obj
+__Habs1 0 0 ABS 0 abs1 -
+__Hcode 0 0 ABS 0 code -
+__Hinit 0 0 CODE 0 init -
+__Hsfr0 0 0 ABS 0 sfr0 -
+__Hsfr1 0 0 ABS 0 sfr1 -
+__Hsfr2 0 0 ABS 0 sfr2 -
+__Hsfr3 0 0 ABS 0 sfr3 -
+__Htext 0 0 ABS 0 text -
+__Labs1 0 0 ABS 0 abs1 -
+__Lcode 0 0 ABS 0 code -
+__Linit 0 0 CODE 0 init -
+__Lsfr0 0 0 ABS 0 sfr0 -
+__Lsfr1 0 0 ABS 0 sfr1 -
+__Lsfr2 0 0 ABS 0 sfr2 -
+__Lsfr3 0 0 ABS 0 sfr3 -
+__Ltext 0 0 ABS 0 text -
+___bmul 1B3E 0 CODE 0 text10 dist/default/production\LR5_9.X.production.obj
+__LcstackBANK0 0 0 ABS 0 cstackBANK0 -
+__HcstackCOMMON 0 0 ABS 0 cstackCOMMON -
+_RC6 3E 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_RC7 3F 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__S0 2008 0 ABS 0 - -
+__S1 C2 0 ABS 0 - -
+__S2 0 0 ABS 0 - -
+sendbyte@c 23 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__Lintentry 0 0 CODE 0 intentry -
+reset_vec 0 0 CODE 0 reset_vec C:\Users\843E~1\AppData\Local\Temp\s81s.obj
+__pdataBANK1 A0 0 BANK1 1 dataBANK1 dist/default/production\LR5_9.X.production.obj
+__size_of___bmul 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__LbssBANK0 0 0 ABS 0 bssBANK0 -
+__size_of_sendbyte 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+___awmod@counter 29 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__ptext10 1B3E 0 CODE 0 text10 dist/default/production\LR5_9.X.production.obj
+__ptext11 1CB8 0 CODE 0 text11 dist/default/production\LR5_9.X.production.obj
+__ptext12 1D52 0 CODE 0 text12 dist/default/production\LR5_9.X.production.obj
+__ptext13 1C34 0 CODE 0 text13 dist/default/production\LR5_9.X.production.obj
+__ptext14 38 0 CODE 0 text14 dist/default/production\LR5_9.X.production.obj
+__ptext15 1B1A 0 CODE 0 text15 dist/default/production\LR5_9.X.production.obj
+__ptext16 1B92 0 CODE 0 text16 dist/default/production\LR5_9.X.production.obj
+___awdiv 1D52 0 CODE 0 text12 dist/default/production\LR5_9.X.production.obj
+___awmod 1CB8 0 CODE 0 text11 dist/default/production\LR5_9.X.production.obj
+___ftdiv 18E 0 CODE 0 text8 dist/default/production\LR5_9.X.production.obj
+___ftmul 2FC 0 CODE 0 text7 dist/default/production\LR5_9.X.production.obj
+___fttol 1EE4 0 CODE 0 text6 dist/default/production\LR5_9.X.production.obj
+__pmaintext 4A0 0 CODE 0 maintext dist/default/production\LR5_9.X.production.obj
+LCD_String@i 26 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__Lcommon 0 0 ABS 0 common -
+__Lconfig 400E 0 CONFIG 0 config -
+?___ftpack 20 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__CFG_CP$OFF 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__CFG_WDTE$OFF 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__Hinittext 0 0 ABS 0 inittext -
+__size_of_LCD_SetPos 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__size_of_LCD_String 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+___lwtoft@c 28 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+stackhi 0 0 ABS 0 - C:\Users\843E~1\AppData\Local\Temp\s81s.obj
+stacklo 0 0 ABS 0 - C:\Users\843E~1\AppData\Local\Temp\s81s.obj
+_segchar 96C 0 CODE 0 text1 dist/default/production\LR5_9.X.production.obj
+?___lwtoft 28 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__Lspace_0 0 0 ABS 0 - -
+__Lspace_1 0 0 ABS 0 - -
+__Lspace_2 0 0 ABS 0 - -
+__Lspace_3 0 0 ABS 0 - -
+main@ch 5A 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+_sendbyte 1B1A 0 CODE 0 text15 dist/default/production\LR5_9.X.production.obj
+___ftmul@cntr 36 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___ftmul@sign 37 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+init_fetch0 1AFA 0 CODE 0 inittext dist/default/production\LR5_9.X.production.obj
+__HcstackBANK0 0 0 ABS 0 cstackBANK0 -
+__Lend_init 0 0 CODE 0 end_init -
+__LcstackCOMMON 0 0 ABS 0 cstackCOMMON -
+end_of_initialization FFA 0 CODE 0 cinit dist/default/production\LR5_9.X.production.obj
+__end_of_sendbyte 1B3E 0 CODE 0 text15 dist/default/production\LR5_9.X.production.obj
+__Hintentry 0 0 CODE 0 intentry -
+__Lstrings 0 0 ABS 0 strings -
+___awdiv@quotient 27 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+?___awdiv 20 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+?___awmod 24 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+?___ftdiv 38 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+?___ftmul 28 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+?___fttol 48 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__Hreset_vec 0 0 CODE 0 reset_vec -
+__HbssBANK0 0 0 ABS 0 bssBANK0 -
+___awmod@dividend 26 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__ptext1 96C 0 CODE 0 text1 dist/default/production\LR5_9.X.production.obj
+__ptext2 1BC2 0 CODE 0 text2 dist/default/production\LR5_9.X.production.obj
+__ptext3 1BF8 0 CODE 0 text3 dist/default/production\LR5_9.X.production.obj
+__ptext4 8 0 CODE 0 text4 dist/default/production\LR5_9.X.production.obj
+__ptext5 1B64 0 CODE 0 text5 dist/default/production\LR5_9.X.production.obj
+__ptext6 1EE4 0 CODE 0 text6 dist/default/production\LR5_9.X.production.obj
+__ptext7 2FC 0 CODE 0 text7 dist/default/production\LR5_9.X.production.obj
+__ptext8 18E 0 CODE 0 text8 dist/default/production\LR5_9.X.production.obj
+__ptext9 1E08 0 CODE 0 text9 dist/default/production\LR5_9.X.production.obj
+__Lpowerup 0 0 CODE 0 powerup -
+__Leeprom_data 0 0 EEDATA 3 eeprom_data -
+LCD_String@st 25 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__Lreset_vec 0 0 CODE 0 reset_vec -
+__CFG_FOSC$HS 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+main@adc_data2 5F 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___ftmul@exp 32 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__end_of__initialization FFA 0 CODE 0 cinit dist/default/production\LR5_9.X.production.obj
+___awmod@divisor 24 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+main@adc_data 60 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__Lfunctab 0 0 ENTRY 0 functab -
+__pidataBANK1 1C74 0 CODE 0 idataBANK1 dist/default/production\LR5_9.X.production.obj
+__Lclrtext 0 0 ABS 0 clrtext -
+main@adc_data_raw 5C 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___ftpack@sign 24 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__CFG_PWRTE$ON 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__pcstackCOMMON 0 0 COMMON 1 cstackCOMMON dist/default/production\LR5_9.X.production.obj
+___ftdiv@cntr 42 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+___ftdiv@sign 47 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__Hend_init 4 0 CODE 0 end_init -
+init_ram0 1B02 0 CODE 0 inittext dist/default/production\LR5_9.X.production.obj
+__end_of_main 96C 0 CODE 0 maintext dist/default/production\LR5_9.X.production.obj
+_ADCS0 FE 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_ADCS1 FF 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_ADRES 1E 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__end_of_delay 38 0 CODE 0 text4 dist/default/production\LR5_9.X.production.obj
+_PCFG0 4F8 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_PCFG1 4F9 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_PCFG2 4FA 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_PORTA 5 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_PORTB 6 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_TRISA 85 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_TRISB 86 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+_TRISC 87 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__Hram 0 0 ABS 0 ram -
+__Lram 0 0 ABS 0 ram -
+_delay 8 0 CODE 0 text4 dist/default/production\LR5_9.X.production.obj
+_str01 65 0 BANK0 1 bssBANK0 dist/default/production\LR5_9.X.production.obj
+_str02 A0 0 BANK1 1 dataBANK1 dist/default/production\LR5_9.X.production.obj
+___fttol@sign1 50 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__HdataBANK1 0 0 ABS 0 dataBANK1 -
+__initialization FCC 0 CODE 0 cinit dist/default/production\LR5_9.X.production.obj
+___bmul@product 22 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+__pbssBANK0 63 0 BANK0 1 bssBANK0 dist/default/production\LR5_9.X.production.obj
+__size_of_LCD_Init 0 0 ABS 0 - dist/default/production\LR5_9.X.production.obj
+__pswtext1 1000 0 CONST 0 swtext1 dist/default/production\LR5_9.X.production.obj
+___ftmul@f3_as_product 33 0 BANK0 1 cstackBANK0 dist/default/production\LR5_9.X.production.obj
+# %SPLITSTAB Section
+# This section enumerates all the psect splits performed by the assembler.
+# The beginning of the section is indicated by %SPLITSTAB.
+# Each line is a record a particular split, where the parent psect is on
+# the left and the child on the right.  Note that a child psect is always
+# split form the top of the parent psect. All splits from a given parent
+# are listed in the order in which they occurred.
+%SPLITSTAB
+# %DABS Section
+# This section contains a table of all usuage of the assember
+# directive DABS in the program. Each line has the following format:
+#   <name> <space> <address> <size>
+# If the DABS was originally labelled then that shall be <name>,
+# otherwise name will be "-".  The <space> number is in decimal.
+# <address> and <size> are in byte units as unqaulified hexadecimal
+%DABS
+- 1 7E 2
+# %SEGMENTS Section
+# This sections enumerates the segments of the program.  Each segment
+# is described on a single line as follows:
+#    <name> <space> <link address> <file address> <size> <delta>
+# Addresses and size are in unqualified hexadecimal.  The link address
+# and size are in units of delta. The file address is in units of bytes.
+# All other numeric quantities are in decimal.
+%SEGMENTS
+cinit 0 7E6 FCC 1A 2
+text1 0 4B6 96C 330 2
+text2 0 DE1 1BC2 1B 2
+text3 0 DFC 1BF8 1E 2
+text4 0 4 8 18 2
+text5 0 DB2 1B64 17 2
+text6 0 F72 1EE4 8E 2
+text7 0 17E 2FC D2 2
+text8 0 C7 18E B7 2
+text9 0 F04 1E08 6E 2
+text10 0 D9F 1B3E 13 2
+text11 0 E5C 1CB8 4D 2
+text12 0 EA9 1D52 5B 2
+text13 0 E1A 1C34 20 2
+text14 0 1C 38 AB 2
+text15 0 D8D 1B1A 12 2
+text16 0 DC9 1B92 18 2
+maintext 0 250 4A0 266 2
+cstackBANK0 1 20 20 4F 1
+inittext 0 D7D 1AFA 10 2
+reset_vec 0 0 0 2 2
+idataBANK1 0 E3A 1C74 22 2
+swtext1 0 800 1000 3E 2
+dataBANK1 1 A0 A0 22 1
+config 0 2007 400E 1 2
