@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>LR5_9</name>
+            <name>Clock with multiple alarms</name>
             <creation-uuid>de26cdbf-a33b-458e-b5ad-187ca4886697</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
