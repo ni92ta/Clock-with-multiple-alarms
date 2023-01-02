@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Вольт-амперметр
+PROJECTNAME=Clock with multiple alarms
 
 # Active Configuration
 DEFAULTCONF=default
