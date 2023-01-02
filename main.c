@@ -10,10 +10,99 @@
 #include	<math.h>
 #include	<float.h>
 //------------------------------------------------
-  char str01[30]={'\0'};
-  char str03[7]={'\0'};
-  //int str02[25]={ 164, 164, 65 ,161, 80, 169, 164, 75, 65, 46, 46, 46,
-  //46, 46, 46, 46,46,46,46,46,46,46,46,46,46};
+  //char str01[30]={'\0'};
+  //char str03[7]={'\0'};
+/*  int str02[8]={0b00001110,
+                0b00011111,
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00011111,
+                0b00011111,
+                0b00011111
+  };*/
+  //--------------------------------------------------------------
+  unsigned char str01[8]={
+                0b00011111,
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00010001
+  };
+  unsigned char str02[8]={
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00011111
+  };
+  unsigned char str03[8]={
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001
+  };
+  unsigned char str04[8]={
+                0b00011111,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001
+  };
+  unsigned char str05[8]={
+                0b00011111,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00011111
+  };
+  unsigned char str06[8]={
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00000001,
+                0b00011111
+  };
+  unsigned char str07[8]={
+                0b00011111,
+                0b00010000,
+                0b00010000,
+                0b00010000,
+                0b00010000,
+                0b00010000,
+                0b00010000,
+                0b00011111
+  };
+  unsigned char str08[8]={
+                0b00011111,
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00010001,
+                0b00011111
+  };
+//--------------------------------------------------------------
   unsigned int TIM0_count=0;// глобальная переменная для сёта 
   //вхождений в обработчик прерываний
   unsigned char a;
@@ -31,272 +120,82 @@ for(i=0;i<19;i++);
 
 void sendbytee(unsigned char c, unsigned char mode) //
 {
-PORTB=c; //
+PORTB = c; //
 if(mode==0) rs=1;
 else rs=0;
 e=0;
 __delay_ms(5);;
 e=1;
 }
-//------------------------------------------------
- void segchar (unsigned int adc_data)
-{ 
-switch (adc_data)
-  {ut=0;
-    case 0:
-      if(ut==0){
-        PORTCbits.RC4 = 1;  
-      }  
-      else{
-          PORTCbits.RC4 = 0;
-      }
-for(y=0;y<15;y++)
+//--------------------------------------------------
+void digit_out (unsigned char digit, unsigned char str1, unsigned char str2)
 {
-    LCD_SetPos(0+y,1);
-      sendbytee(0b00100000,0);
-}
-      break;
+switch (digit){
+    case 0:
+LCD_SetPos(str1,0);
+sendbytee(0b00000000,0);//0
+LCD_SetPos(str2,1);
+sendbytee(0b00000001,0);//0        
+        break;
     case 1:
-        goto cas2;
+LCD_SetPos(str1,0);
+sendbytee(0b00000010,0);//1
+LCD_SetPos(str2,1);
+sendbytee(0b00000010,0);//1        
         break;
     case 2:
-        cas2:
-        LCD_SetPos(0,1);
-      sendbytee(0b11111111,0);
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(1+y,1);
-      sendbytee(0b00100000,0);
-}
-      break;
+LCD_SetPos(str1,0);
+sendbytee(0b00000011,0);//2
+LCD_SetPos(str2,1);
+sendbytee(0b00000110,0);//2        
+        break;
     case 3:
-        goto cas4;
+LCD_SetPos(str1,0);
+sendbytee(0b00000011,0);//3
+LCD_SetPos(str2,1);
+sendbytee(0b00000100,0);//3        
         break;
     case 4:
-        cas4:
-        for(t=0;t<2;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(2+y,1);
-      sendbytee(0b00100000,0);
-}
-      break;
-       case 5:
-        goto cas6;
+LCD_SetPos(str1,0);
+sendbytee(0b00000001,0);//4
+LCD_SetPos(str2,1);
+sendbytee(0b00000010,0);//4        
         break;
-      case 6:
-          cas6:
-          for(t=0;t<3;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(3+y,1);
-      sendbytee(0b00100000,0);
-} 
-     break; 
-      case 7:
-        goto cas8;
+    case 5:
+LCD_SetPos(str1,0);
+sendbytee(0b00000110,0);//5
+LCD_SetPos(str2,1);
+sendbytee(0b00000101,0);//5        
+        break;
+    case 6:
+LCD_SetPos(str1,0);
+sendbytee(0b00000110,0);//6
+LCD_SetPos(str2,1);
+sendbytee(0b00000001,0);//6        
+        break;
+    case 7:
+LCD_SetPos(str1,0);
+sendbytee(0b00000011,0);//7
+LCD_SetPos(str2,1);
+sendbytee(0b00000010,0);//7        
         break;
     case 8:
-        cas8:
-         for(t=0;t<4;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(4+y,1);
-      sendbytee(0b00100000,0);
-}
-      break;
-       case 9:
-        goto cas10;
+LCD_SetPos(str1,0);
+sendbytee(0b00000111,0);//8
+LCD_SetPos(str2,1);
+sendbytee(0b00000001,0);//8        
         break;
-    case 10:
-        cas10:
-     for(t=0;t<5;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(5+y,1);
-      sendbytee(0b00100000,0);
+    case 9:
+LCD_SetPos(str1,0);
+sendbytee(0b00000111,0);//9
+LCD_SetPos(str2,1);
+sendbytee(0b00000101,0);//9        
+        break;        
+}  
 }
-      break;
-       case 11:
-        goto cas12;
-        break;
-      case 12:
-          cas12:
-       for(t=0;t<6;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(6+y,1);
-      sendbytee(0b00100000,0);
-}
-      break;
-       case 13:
-        goto cas14;
-        break;
-    case 14:
-        cas14:
-       for(t=0;t<7;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(7+y,1);
-      sendbytee(0b00100000,0);
-}
-      break;
-    case 15:
-      goto cas16;
-        break;
-    case 16:
-        cas16:
-           for(t=0;t<8;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(8+y,1);
-      sendbytee(0b00100000,0);
-}
-      break;
-       case 17:
-        goto cas18;
-        break;
-    case 18:
-        cas18:
-           for(t=0;t<9;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(9+y,1);
-      sendbytee(0b00100000,0);
-}
-      break;
-       case 19:
-        goto cas20;
-        break;
-    case 20:
-        cas20:
-             for(t=0;t<10;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(10+y,1);
-      sendbytee(0b00100000,0);
-}
-      break;
-       case 21:
-        goto cas22;
-        break;
-    case 22:
-        cas22:
-             for(t=0;t<11;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(11+y,1);
-      sendbytee(0b00100000,0);
-}
-      break;
-       case 23:
-        goto cas24;
-        break;
-    case 24:
-        cas24:
-                 for(t=0;t<12;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(12+y,1);
-      sendbytee(0b00100000,0);
-}
-      break;
-       case 25:
-        goto cas26;
-        break;
-    case 26:
-        cas26:
-                  for(t=0;t<13;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(13+y,1);
-      sendbytee(0b00100000,0);
-}
-      break;
-       case 27:
-        goto cas28;
-        break;
-    case 28:
-        cas28:
-                   for(t=0;t<14;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-for(y=0;y<15;y++)
-{
-    LCD_SetPos(14+y,1);
-      sendbytee(0b00100000,0);
-}
-      break;
-      case 29:
-        goto cas30;
-        break;
-    case 30:
-        cas30:
-                for(t=0;t<16;t++)
-        {
-            LCD_SetPos(0+t,1);
-      sendbytee(0b11111111,0);
-        }
-      break;
-}
- }
 //--------------------------------------------------
 void main() // 
 {
-int adc_data_raw = 0; //float adc_data_raw = .0f;
-//int adc_data_raw1 = 0;
-int adc_data = 0; //
-int adc_data2 = 0;
 unsigned char ch = 0;
 TRISA = 0b00000111; // 
 PORTA = 0x00;
@@ -312,8 +211,36 @@ PCFG1 = 0;
 PCFG0 = 0;//1
 
 ADON = 1;//ADC On
+  sendbyte(0b01000000,0);//sets CGRAM address
+  for (unsigned char x = 0;x<=7;x++){
+    sendbyte(str01[x],1);
+}
+    for (unsigned char x=0;x<=7;x++){
+    sendbyte(str02[x],1);
+}
+    for (unsigned char x=0;x<=7;x++){
+    sendbyte(str03[x],1);
+}
+    for (unsigned char x=0;x<=7;x++){
+    sendbyte(str04[x],1);
+}
+    for (unsigned char x=0;x<=7;x++){
+    sendbyte(str05[x],1);
+}
+    for (unsigned char x=0;x<=7;x++){
+    sendbyte(str06[x],1);
+}
+    for (unsigned char x=0;x<=7;x++){
+    sendbyte(str07[x],1);
+}
+    for (unsigned char x=0;x<=7;x++){
+    sendbyte(str08[x],1);
+}
+   __delay_us(40);
 LCD_Init();
 delay();
+
+
 //------------------------------------------
 /*unsigned int l;
 LCD_SetPos(6,0);
@@ -330,70 +257,92 @@ for(l=9;l<25;l++)
 }
 sendbytee(0b00000001,1);//очистка дисплея*/
 //----------------------------------------
+    unsigned char digit;
+    unsigned char digit2 = 0;
 while(1)
-{//adc_data_raw=0;
-   // unsigned int ch;
-GO = 1; //
-while(GO);
-__delay_us(10);
-
-adc_data_raw = (unsigned int)ADRES; //
-adc_data = ((float)adc_data_raw * 500 / 255);//(int)adc_data_raw
-//adc_data2 =((float)adc_data_raw * 5 / 255 );//(int)adc_data_raw
-if (!ch)
 {
-    ch=0;
-LCD_SetPos(0,0);
-CHS0 = 1;//
-CHS1 = 0;//
-CHS2 = 0;//
-//adc_data=adc_data2 - 273;
-//sprintf(str01,"%.2f V",adc_data);
-sendbytee((unsigned char) (adc_data/100)%10+0x30, 0);
-sendbytee((unsigned char) (adc_data*10)%10+0x30, 0);
-sendbytee((unsigned char)0b00101110 , 0);
-sendbytee(((unsigned char) (adc_data*100)%10)+0x30, 0);//100
-//sendbytee(((unsigned char) (adc_data*1000)%10)+0x30, 0);//1000
-//sendbytee(((unsigned char) (adc_data*10000)%10)+0x30, 0);
-sendbytee((unsigned char)0b01000010 , 0);
-//segchar(adc_data);//вызов строки состояния напряжения
-//__delay_ms(100);
+
+for (digit = 0; digit <= 9; digit++){    
+    digit_out(digit, 3, 3);
+__delay_ms(1000);
+}
+digit2++;
+digit_out(digit2, 1, 1);
+if (digit2 == 9) digit2 = 0;
+}
+
+    
+    
+
+}
+
+  /*
+   sendbytee(0b11111111,0);
+sendbytee(0b00000000,0);//1
+sendbytee(0b00000001,0);//2
+sendbytee(0b00000010,0);//3
+sendbytee(0b00000011,0);//4
+sendbytee(0b00000100,0);//5
+sendbytee(0b00000101,0);//6
+sendbytee(0b00000110,0);//7
+sendbytee(0b00000111,0);//8
+sendbytee(0b11111111,0);
+sendbytee(0b11110000,0);
+sendbytee(0b11101101,0);*/
 
 /*
-str01[0]= (((adc_data)/10)+0x30);
-str01[1]=  ((unsigned char)((adc_data)%10)+0x30);
-str01[2]= 0b00101110;// выводим десятичную точку 
-str01[3]= (((unsigned char)((adc_data)*100)%10)+0x30);
-str01[4]=0b01000010;
-LCD_String(str01);
-segchar(adc_data);//вызов строки состояния напряжения
-//__delay_ms(100);
-*/
+ LCD_SetPos(0,0);
+sendbytee(0b00000010,0);//1
+LCD_SetPos(0,1);
+sendbytee(0b00000010,0);//1
 
+LCD_SetPos(2,0);
+sendbytee(0b00000011,0);//2
+LCD_SetPos(2,1);
+sendbytee(0b00000110,0);//2
 
-}
-else
-{
-  ch=0;
+LCD_SetPos(4,0);
+sendbytee(0b00000011,0);//3
+LCD_SetPos(4,1);
+sendbytee(0b00000100,0);//3
+
+LCD_SetPos(6,0);
+sendbytee(0b00000001,0);//4
+LCD_SetPos(6,1);
+sendbytee(0b00000010,0);//4
+
 LCD_SetPos(7,0);
-CHS0 = 0;//
-CHS1 = 0;//
-CHS2 = 0;//
-str03[0]= ( ((adc_data2)/10)+0x30 );
-str03[1]= 0b00101110;// выводим десятичную точку
-str03[2]= ( ((adc_data2)%10)+0x30 );
-str03[3]= ((char)  ((adc_data2)*100) %10+0x30 );
-str03[4]=((char)  ((adc_data2)*1000)%10+0x30 );
-str03[5]=0b01000001;//вывод буквы А
-LCD_String(str03);//вывод значения в массиве в строку 
-  //str01[0]=0;
- /// str01[1]=0;
-  //str01[3]=0;
-}
+sendbytee(0b00101110,0);//.
+LCD_SetPos(7,1);
+sendbytee(0b00101110,0);//.
 
-}
-}
+LCD_SetPos(8,0);
+sendbytee(0b00000110,0);//5
+LCD_SetPos(8,1);
+sendbytee(0b00000101,0);//5
 
-  
+LCD_SetPos(10,0);
+sendbytee(0b00000110,0);//6
+LCD_SetPos(10,1);
+sendbytee(0b00000001,0);//6
 
+LCD_SetPos(11,0);
+sendbytee(0b00000011,0);//7
+LCD_SetPos(11,1);
+sendbytee(0b00000010,0);//7
 
+LCD_SetPos(12,0);
+sendbytee(0b00000111,0);//8
+LCD_SetPos(12,1);
+sendbytee(0b00000001,0);//8
+
+LCD_SetPos(13,0);
+sendbytee(0b00000111,0);//9
+LCD_SetPos(13,1);
+sendbytee(0b00000101,0);//9
+
+LCD_SetPos(15,0);
+sendbytee(0b00000000,0);//0
+LCD_SetPos(15,1);
+sendbytee(0b00000001,0);//0
+ */
