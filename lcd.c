@@ -55,9 +55,9 @@ sendbyte(0b00110000,0);//on
   
    sendbyte(0b00000010,0);//
    __delay_us(40);
-  
-  
-  sendbyte(0b01000000,0);//sets CGRAM address
+ 
+   
+   sendbyte(0b01000000,0);//sets CGRAM address
    __delay_us(40);
    
    sendbyte(0X06,0);//direction left to right
