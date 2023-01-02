@@ -10,9 +10,9 @@ CND_CONF=default
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/_____-_________.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=_____-_________.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=גמכüע-אלןונלוענ/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/Clock_with_multiple_alarms.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=Clock_with_multiple_alarms.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=clockwithmultiplealarms/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/גמכüע-אלןונלוענ/bin
+makeDirectory ${TMPDIR}/clockwithmultiplealarms/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/גמכüע-אלןונלוענ.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/clockwithmultiplealarms.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/גמכüע-אלןונלוענ.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/clockwithmultiplealarms.tar *
 checkReturnCode
 
 # Cleanup
