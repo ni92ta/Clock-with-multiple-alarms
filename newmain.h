@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 //--------------------------------------------------------------
-#define _XTAL_FREQ 4000000
+#define _XTAL_FREQ 20000000
 #include <xc.h>
 // CONFIG
 #pragma config FOSC = HS        // Oscillator Selection bits (HS oscillator)
@@ -12,5 +12,6 @@
 
 //--------------------------------------------------------------
 #include "lcd.h"
+#include "I2C.h"
 //--------------------------------------------------------------
 #endif /* MAIN_H */
