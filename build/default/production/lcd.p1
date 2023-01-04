@@ -813,6 +813,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;lcd.h: 7: void LCD_Init();
 [; ;lcd.h: 8: void LCD_String(char* st);
 [; ;lcd.h: 9: void LCD_SetPos(unsigned char x, unsigned char y);
+[; ;lcd.h: 10: void sendbyte(unsigned char c, unsigned char mode);
 "7 lcd.c
 [v _LCD_delay `(v ~T0 @X0 1 ef ]
 "8
