@@ -7,5 +7,6 @@ void LCD_PORT_init();
 void LCD_Init();
 void LCD_String(char* st);
 void LCD_SetPos(unsigned char x, unsigned char y);
+void sendbyte(unsigned char c, unsigned char mode);
 //--------------------------------------------------------------
 #endif /* LCD_H */
