@@ -1,8 +1,8 @@
 #include "lcd.h"
 #define _XTAL_FREQ 4000000
 //--------------------------------------------------------------
-#define rs RC6 //
-#define e RC7 //
+#define rs RA0 //RC6
+#define e RA1 //RC7
 //--------------------------------------------------------------
 void LCD_delay() //
 {
