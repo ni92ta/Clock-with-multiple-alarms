@@ -15,6 +15,48 @@
 #include	<sys.h>
 #include	<math.h>
 #include	<float.h>
+
+#define _XTAL_FREQ 20000000
+#define dev_addrw 0b10100000 //запись
+#define dev_addrr 0b10100001 //чтение
+
+ unsigned char alrm;
+     unsigned char sece;//единицы секунд
+     unsigned char secd;//десятки секунд
+     unsigned char sec;//секунды до преобразования
+     unsigned char min;//минуты до преобразования
+     unsigned char min_alar;//минуты будильника до преобразования
+     unsigned char mine;//единицы минут после преобразования
+     unsigned char mind;//десятки минут после преобразования
+     unsigned char mine_alar;//единицы минут будильника после преобразования
+     unsigned char mind_alar;//десятки минут будильника после преобразования     
+     unsigned char hour;//часы до преобразования
+     unsigned char hour_alar;//часы будильника до преобразования
+     unsigned char houre;//единицы часов после преобразования
+     unsigned char hourd;//десятки часов после преобразования
+     unsigned char houre_alar;//единицы часов будильника после преобразования
+     unsigned char hourd_alar;//десятки часов будильника после преобразования     
+     unsigned char minee;//переменная для настройки минут 
+     unsigned char houree;//переменная для настройки часов
+     unsigned char minee_alar;//переменная для настройки минут 
+     unsigned char houree_alar;//переменная для настройки часов
+     unsigned char control_2;//переменная для настройки часов
+     /*unsigned char Days;//переменная числа до преобразования
+     unsigned char Daysset;//переменная для настройки числа
+     unsigned char Weekdays;//переменная дня недели до преобразования
+     //unsigned char Weekdaysset;//переменная для настройки дня недели
+     unsigned char Months;//переменная месяца до преобразования
+     unsigned char Monthsset;//переменная для настройки месяца
+     unsigned char Years;//переменная года до преобразования
+     unsigned char Yearsset;//переменная для настройки года
+     unsigned char Days_pre;//переменная числа после преобразования(единицы)
+     unsigned char Days_prd;//переменная числа после преобразования(десятки)
+     unsigned char Weekdays_pr;//переменная дня недели после преобразования
+     unsigned char Months_pre;//переменная месяца после преобразования(единицы)
+     unsigned char Months_prd;//переменная месяца после преобразования(десятки)
+     //unsigned char Months_pr;//переменная месяца после преобразования
+     unsigned char Years_pre;//переменная года после преобразования(единицы)
+     unsigned char Years_prd;//переменная года после преобразования(десятки)*/
 //------------------------------------------------
   //char str01[30]={'\0'};
   //char str03[7]={'\0'};
@@ -22,7 +64,7 @@
 void PCF8583init (void){//инициализация микросхемы
         __delay_ms(200);
       unsigned char control_3; 
-      /*i2c_start();//отправка посылки СТАРТ
+      i2c_start();//отправка посылки СТАРТ
       I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
       I2C_SendByte (0b00000010);//вызов регистра секунд
       i2c_stop ();//отправка посылки СТОП 
@@ -47,13 +89,59 @@ void PCF8583init (void){//инициализация микросхемы
     I2C_SendByte (0b00000000);//установка будильника часы 0
     I2C_SendByte (0b00000000);//отключение будильника по дню недели 7 бит в единицу
     I2C_SendByte (0b00000000);//отключение будильника по неделе 7 бит в единицу
-   // i2c_stop (); 
-    //i2c_start ();//отправка посылки СТАРТ
-   // I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись 
-    //I2C_SendByte (0b00001101);//вызов регистра clock out
-    I2C_SendByte (0b00000011);//включение делителя частоты 1Hz
     i2c_stop ();
-      }*/ 
+    
+    
+    /*i2c_start ();//отправка посылки СТАРТ
+    I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись 
+    I2C_SendByte (0b00001000);//вызов регистра clock out
+    I2C_SendByte (0b10011101);//включение делителя частоты 1Hz
+    i2c_stop ();*/
+      }
+}
+//------------------------------------------------------------------------------
+unsigned char RTC_ConvertFromDecd(unsigned char c,unsigned char v){//
+    unsigned char ch;
+    if (v==1){
+      c = c>>4;
+       ch = (0b00000011&c);   
+    }
+    if (v==0){
+    ch = (c>>4);     
+    }
+    if (v==2){
+          c = c>>4;
+       ch = (0b00000001&c);  
+    }
+    
+   /* switch (v){
+        case 0:
+          ch = (c>>4);  
+            break;
+                    case 1:
+                  c = c>>4;
+       ch = (0b00000011&c); 
+            break;
+                    case 2:
+          ch = (0b00001111&c); ;  
+            break;
+    }
+    if (v==1) {
+        c = c>>4;
+       ch = (0b00000011&c);
+    }
+    if (v==0){
+       ch = (c>>4);  
+    }
+    if (v==2){
+       ch = (0b00001111&c);  
+    }*/
+    return ch; 
+}
+//--------------------перевод из двоичного в единицы минут и часов--------------
+unsigned char RTC_ConvertFromDec(unsigned char c){//
+    unsigned char ch = (0b00001111&c);
+    return ch;
 }
 //------------------------------------------------------------------------------
   unsigned char str01[8]={
@@ -137,14 +225,14 @@ void PCF8583init (void){//инициализация микросхемы
                 0b00000000
   };
 //--------------------------------------------------------------
-  unsigned int TIM0_count=0;// глобальная переменная для сёта 
+  //unsigned int TIM0_count=0;// глобальная переменная для сёта 
   //вхождений в обработчик прерываний
-  unsigned char a;
-  unsigned char y;
-  unsigned char t;
-  unsigned char ut=0;
-  #define rs RC6 //
-  #define e RC7 //
+  //unsigned char a;
+  //unsigned char y;
+  //unsigned char t;
+  //unsigned char ut=0;
+  #define rs RA0 //
+  #define e RA1 //
 //----------------------------------------------------
 void delay() //
 {
@@ -251,20 +339,20 @@ sendbytee(0b00000011,0);
 void main() // 
 {
 //unsigned char ch = 0;
-TRISA = 0b00000111;// 
-PORTA = 0x00;
+TRISA = 0b00000000;// 
+PORTA = 0b00000000;
 TRISC=0b00000011;
 TRISB=0X00;
-ADCS0 = 1;//Fosc/32 частота преобразования
-ADCS1 = 0;//Fosc/32 частота преобразования
+//ADCS0 = 1;//Fosc/32 частота преобразования
+//ADCS1 = 0;//Fosc/32 частота преобразования
 //OPTION_REG=0x07;// включаем предделитель таймера 1:256
 //INTCON=0xA0;// включаем глобальные прерывания
-TMR0=0;// заносим 0 в регистр счёта таймера - включается счёт
+//TMR0=0;// заносим 0 в регистр счёта таймера - включается счёт
 PCFG2 = 1;//0100 AN7:AN1 ?????, AN0 ??????, ??????? = Vdd, ?????- = Vss
-PCFG1 = 0;
-PCFG0 = 0;//1
+PCFG1 = 1;
+PCFG0 = 1;//1
 
-ADON = 1;//ADC On
+//ADON = 1;//ADC On
   sendbyte(0b01000000,0);//sets CGRAM address
   for (unsigned char x = 0;x<=7;x++){
     sendbyte(str01[x],1);
@@ -307,9 +395,10 @@ ADON = 1;//ADC On
 }
    __delay_ms(100);
 LCD_Init();
-delay();
-
-
+//delay();
+__delay_ms(180);
+ PCF8583init();
+__delay_ms(180);
 //------------------------------------------
 /*unsigned int l;
 LCD_SetPos(6,0);
@@ -330,23 +419,62 @@ sendbytee(0b00000001,1);//очистка дисплея*/
     unsigned char digit2 = 0;
 while(1)
 {
-digit_out(0, 0, 0);
-digit_out(1, 2, 2);
+    
+  i2c_start();//отправка посылки СТАРТ
+      I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
+      I2C_SendByte (0b00000010);//вызов регистра секунд
+      i2c_stop ();//отправка посылки СТОП 
+      i2c_start ();//отправка посылки СТАРТ
+      I2C_SendByte (dev_addrr);//адрес часовой микросхемы - чтение
+      sec = I2C_ReadByte();//чтение секунд
+      min = I2C_ReadByte();//чтение минут
+      hour = I2C_ReadByte();//чтение часов
+      /*Days = I2C_ReadByte();//чтение числа
+      Weekdays = I2C_ReadByte();//чтение дня недели
+      Months = I2C_ReadByte();//чтение месяца
+      Years = I2C_ReadByte();//чтение года
+      min_alar = I2C_ReadByte();//чтение минут будильника
+      hour_alar = I2C_ReadByte_last();//чтение часов будильника*/
+      i2c_stop (); 
+//--------------перевод значения времени в десятичный формат--------------------     
+      sece = RTC_ConvertFromDec(sec);
+      secd = RTC_ConvertFromDecd(sec,0);
+      mine = RTC_ConvertFromDec(min);
+      mind = RTC_ConvertFromDecd(min,0);
+      houre = RTC_ConvertFromDec(hour);
+      hourd = RTC_ConvertFromDecd(hour,1);
+     /* mine_alar = RTC_ConvertFromDec(min_alar);
+      mind_alar = RTC_ConvertFromDecd(min_alar,0);
+      houre_alar = RTC_ConvertFromDec(hour_alar);
+      hourd_alar = RTC_ConvertFromDecd(hour_alar,0);   
+      Days_pre = RTC_ConvertFromDec(Days);
+      Days_prd = RTC_ConvertFromDecd(Days,1);
+      Weekdays_pr = RTC_ConvertFromDec(Weekdays);
+      Months_pre = RTC_ConvertFromDec(Months);
+      Months_prd = RTC_ConvertFromDecd(Months,2);
+      Years_pre = RTC_ConvertFromDec(Years);
+      Years_prd = RTC_ConvertFromDecd(Years,0);   */
+    
+    
+    
+    
+digit_out(hourd, 0, 0);
+digit_out(houre, 2, 2);
 LCD_SetPos(4,0);
 sendbytee(0b00101110,0);
 LCD_SetPos(4,1);
 sendbytee(0b11011111,0);
-digit_out(2, 5, 5);
-digit_out(3, 7, 7);
+digit_out(mind, 5, 5);
+digit_out(mine, 7, 7);
 LCD_SetPos(9,0);
 sendbytee(0b00101110,0);
 LCD_SetPos(9,1);
 sendbytee(0b11011111,0);
-digit_out(4, 10, 10);
-digit_out(5, 12, 12);
-__delay_ms(5000);
-digit_out(6, 0, 0);
-digit_out(7, 2, 2);
+digit_out(secd, 10, 10);
+digit_out(sece, 12, 12);
+/*__delay_ms(5000);
+//digit_out(6, 0, 0);
+//digit_out(7, 2, 2);
 LCD_SetPos(4,0);
 sendbytee(0b00101110,0);
 LCD_SetPos(4,1);
@@ -359,7 +487,7 @@ LCD_SetPos(9,1);
 sendbytee(0b11011111,0);
 digit_out(0, 10, 10);
 digit_out(1, 12, 12);
-__delay_ms(5000);
+__delay_ms(5000);*/
 /*
 digit_out(4, 9, 9);    
 digit_out(5, 11, 11); 
