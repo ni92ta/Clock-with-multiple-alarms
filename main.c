@@ -345,7 +345,7 @@ void main() //
 TRISA = 0b00000000;// 
 PORTA = 0b00000000;
 TRISC=0b00000011;
-TRISB=0X00;
+TRISB=0b00001111;
 ADON = 0;//ADC OFF
 PCFG2 = 1;//0100 AN7:AN1 ?????, AN0 ??????, ??????? = Vdd, ?????- = Vss
 PCFG1 = 1;
@@ -482,6 +482,12 @@ LCD_SetPos(9,1);
 sendbytee(0b11011111,0);
 digit_out(secd, 10, 10);
 digit_out(sece, 12, 12);
+LCD_SetPos(14,0);
+sendbytee(0b11101101,0);
+sendbytee(0b00110101,0);
+LCD_SetPos(14,1);
+sendbytee(0b01000011,0);
+sendbytee(0b10100000,0);
 //__delay_ms(400);
 /*__delay_ms(5000);
 //digit_out(6, 0, 0);
