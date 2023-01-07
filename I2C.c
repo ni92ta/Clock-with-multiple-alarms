@@ -8,7 +8,7 @@
 
 #include <xc.h>
 #include "I2C.h"
-#define _XTAL_FREQ 20000000
+#define _XTAL_FREQ 3579000
 //int result = 0;
 //-------------------------------------------------------
 void i2c_start(void)
