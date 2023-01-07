@@ -11,9 +11,9 @@
 #define SDA TRISC0 //TRISC4
 #define SCL_IN RC1 
 #define SDA_IN RC0
-#define _XTAL_FREQ 20000000
-#define dev_addrw 0b10100000 //запись
-#define dev_addrr 0b10100001 //чтение
+#define _XTAL_FREQ 3579000
+#define dev_addrw 0b10100000 //запись 0b10100000
+#define dev_addrr 0b10100001 //чтение 0b10100001
 //----------------------------------------
 void i2c_start(void);
 void i2c_stop (void);
