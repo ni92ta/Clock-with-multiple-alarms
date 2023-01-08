@@ -4,8 +4,6 @@
  *
  * Created on 4 января 2023 г., 20:01
  */
-
-
 #include <xc.h>
 #include "I2C.h"
 #define _XTAL_FREQ 3579000
