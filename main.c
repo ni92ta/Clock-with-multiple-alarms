@@ -22,8 +22,8 @@
 #define dev_addrw 0b10100000 //запись 0b10100000
 #define dev_addrr 0b10100001 //чтение 0b10100001
 
- #define rs RA0 //
- #define e RA1 //
+ #define rs RB2//
+ #define e RB3//
 
  unsigned char alrm;
      unsigned char sece;//единицы секунд
@@ -229,28 +229,11 @@ unsigned char RTC_ConvertFromDec(unsigned char c){//
                 0b00000000,
                 0b00000000
   };
-//--------------------------------------------------------------
-  //unsigned int TIM0_count=0;// глобальная переменная для сёта 
-  //вхождений в обработчик прерываний
-  //unsigned char a;
-  //unsigned char y;
-  //unsigned char t;
-  //unsigned char ut=0;
 //----------------------------------------------------
 void delay() //
 {
 int i;
 for(i=0;i<19;i++);
-}
-
-void sendbytee(unsigned char c, unsigned char mode) //
-{
-PORTB = c; //
-if(mode==0) rs=1;
-else rs=0;
-e=0;
-__delay_ms(5);
-e=1;
 }
 //--------------------------------------------------
 void digit_out (unsigned char digit, unsigned char str1, unsigned char str2)
@@ -258,83 +241,83 @@ void digit_out (unsigned char digit, unsigned char str1, unsigned char str2)
 switch (digit){
     case 0:
 LCD_SetPos(str1,0);
-sendbytee(0b00000000,0);//0
-sendbytee(0b00000001,0);
+sendbyte(0b00000000,1);//0
+sendbyte(0b00000001,1);
 LCD_SetPos(str2,1);
-sendbytee(0b00000010,0);//0
-sendbytee(0b00000011,0);
+sendbyte(0b00000010,1);//0
+sendbyte(0b00000011,1);
         break;
     case 1:
 LCD_SetPos(str1,0);
-sendbytee(0b00000001,0);//1
-sendbytee(0b00100000,0);
+sendbyte(0b00000001,1);//1
+sendbyte(0b00100000,1);
 LCD_SetPos(str2,1);
-sendbytee(0b00000011,0);//1
-sendbytee(0b00000110,0);
+sendbyte(0b00000011,1);//1
+sendbyte(0b00000110,1);
         break;
     case 2:
 LCD_SetPos(str1,0);
-sendbytee(0b00000111,0);//2
-sendbytee(0b00000100,0);
+sendbyte(0b00000111,1);//2
+sendbyte(0b00000100,1);
 LCD_SetPos(str2,1);
-sendbytee(0b00000101,0);//2
-sendbytee(0b00000110,0);
+sendbyte(0b00000101,1);//2
+sendbyte(0b00000110,1);
         break;
     case 3:
 LCD_SetPos(str1,0);
-sendbytee(0b00000111,0);//3
-sendbytee(0b00000100,0);
+sendbyte(0b00000111,1);//3
+sendbyte(0b00000100,1);
 LCD_SetPos(str2,1);
-sendbytee(0b00000110,0);//3
-sendbytee(0b00000011,0);
+sendbyte(0b00000110,1);//3
+sendbyte(0b00000011,1);
         break;
     case 4:
 LCD_SetPos(str1,0);
-sendbytee(0b00000010,0);//4
-sendbytee(0b00000011,0);
+sendbyte(0b00000010,1);//4
+sendbyte(0b00000011,1);
 LCD_SetPos(str2,1);
-sendbytee(0b00100000,0);//4
-sendbytee(0b00000001,0);
+sendbyte(0b00100000,1);//4
+sendbyte(0b00000001,1);
         break;
     case 5:
 LCD_SetPos(str1,0);
-sendbytee(0b00000101,0);//5
-sendbytee(0b00000111,0);
+sendbyte(0b00000101,1);//5
+sendbyte(0b00000111,1);
 LCD_SetPos(str2,1);
-sendbytee(0b00000110,0);//5
-sendbytee(0b00000100,0);
+sendbyte(0b00000110,1);//5
+sendbyte(0b00000100,1);
         break;
     case 6:
 LCD_SetPos(str1,0);
-sendbytee(0b00000000,0);//6
-sendbytee(0b00100000,0);
+sendbyte(0b00000000,1);//6
+sendbyte(0b00100000,1);
 LCD_SetPos(str2,1);
-sendbytee(0b00000101,0);//6
-sendbytee(0b00000100,0);
+sendbyte(0b00000101,1);//6
+sendbyte(0b00000100,1);
         break;
     case 7:
 LCD_SetPos(str1,0);
-sendbytee(0b00000111,0);//7
-sendbytee(0b00000001,0);
+sendbyte(0b00000111,1);//7
+sendbyte(0b00000001,1);
 LCD_SetPos(str2,1);
-sendbytee(0b00100000,0);//7
-sendbytee(0b00000001,0);
+sendbyte(0b00100000,1);//7
+sendbyte(0b00000001,1);
         break;
     case 8:
 LCD_SetPos(str1,0);
-sendbytee(0b00000101,0);//8
-sendbytee(0b00000100,0);
+sendbyte(0b00000101,1);//8
+sendbyte(0b00000100,1);
 LCD_SetPos(str2,1);
-sendbytee(0b00000010,0);//8
-sendbytee(0b00000011,0);        
+sendbyte(0b00000010,1);//8
+sendbyte(0b00000011,1);        
         break;
     case 9:
 LCD_SetPos(str1,0);
-sendbytee(0b00000101,0);//9
-sendbytee(0b00000100,0);//
+sendbyte(0b00000101,1);//9
+sendbyte(0b00000100,1);//
 LCD_SetPos(str2,1);
-sendbytee(0b00000110,0);//9
-sendbytee(0b00000011,0);
+sendbyte(0b00000110,1);//9
+sendbyte(0b00000011,1);
         break;        
 }  
 }
@@ -343,9 +326,9 @@ void main() //
 {
 //unsigned char ch = 0;
 TRISA = 0b00000000;// 
-PORTA = 0b00000000;
+//PORTA = 0b00000000;
 TRISC=0b00000011;
-TRISB=0b00001111;
+TRISB=0b00000000;
 ADON = 0;//ADC OFF
 PCFG2 = 1;//0100 AN7:AN1 ?????, AN0 ??????, ??????? = Vdd, ?????- = Vss
 PCFG1 = 1;
@@ -425,11 +408,11 @@ for(l=9;l<25;l++)
 }
 sendbytee(0b00000001,1);//очистка дисплея*/
 //----------------------------------------
-    //unsigned char digit;
-    //unsigned char digit2 = 0;
+    unsigned char digit;
+    unsigned char digit2 = 0;
 while(1)
 {
-    
+  
   i2c_start();//отправка посылки СТАРТ
       I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
       I2C_SendByte (0b00000010);//вызов регистра секунд
@@ -452,7 +435,7 @@ while(1)
       mine = RTC_ConvertFromDec(min);
       mind = RTC_ConvertFromDecd(min,0);
       houre = RTC_ConvertFromDec(hour);
-      hourd = RTC_ConvertFromDecd(hour,1);
+      hourd = RTC_ConvertFromDecd(hour,1); 
      /* mine_alar = RTC_ConvertFromDec(min_alar);
       mind_alar = RTC_ConvertFromDecd(min_alar,0);
       houre_alar = RTC_ConvertFromDec(hour_alar);
@@ -467,31 +450,32 @@ while(1)
     
     
    
-    
+
 digit_out(hourd, 0, 0);//hourd
 digit_out(houre, 2, 2);//houre
 LCD_SetPos(4,0);
-sendbytee(0b00101110,0);
+sendbyte(0b00101110,1);
 LCD_SetPos(4,1);
-sendbytee(0b11011111,0);
+sendbyte(0b11011111,1);
 digit_out(mind, 5, 5);
 digit_out(mine, 7, 7);
 LCD_SetPos(9,0);
-sendbytee(0b00101110,0);
+sendbyte(0b00101110,1);
 LCD_SetPos(9,1);
-sendbytee(0b11011111,0);
+sendbyte(0b11011111,1);
 digit_out(secd, 10, 10);
 digit_out(sece, 12, 12);
 LCD_SetPos(14,0);
-sendbytee(0b11101101,0);
-sendbytee(0b00110101,0);
+sendbyte(0b11101101,1);
+sendbyte(0b00110101,1);
 LCD_SetPos(14,1);
-sendbytee(0b01000011,0);
-sendbytee(0b10100000,0);
+sendbyte(0b01000011,1);
+sendbyte(0b10100000,1);
+     
 //__delay_ms(400);
 /*__delay_ms(5000);
-//digit_out(6, 0, 0);
-//digit_out(7, 2, 2);
+digit_out(6, 0, 0);
+digit_out(7, 2, 2);
 LCD_SetPos(4,0);
 sendbytee(0b00101110,0);
 LCD_SetPos(4,1);
@@ -503,26 +487,37 @@ sendbytee(0b00101110,0);
 LCD_SetPos(9,1);
 sendbytee(0b11011111,0);
 digit_out(0, 10, 10);
-digit_out(1, 12, 12);
-__delay_ms(5000);*/
+digit_out(1, 12, 12);*/
+//__delay_ms(5000);
 /*
 digit_out(4, 9, 9);    
 digit_out(5, 11, 11); 
 digit_out(6, 13, 13);
 digit_out(7, 15, 15);*/
-/*    
-for (digit = 0; digit <= 9; digit++){    
-    digit_out(digit, 3, 3);
+  
+  /*  LCD_SetPos(4,0);
+sendbyte(0b11011111,1);
+    __delay_ms(1000);
+     LCD_SetPos(5,1);
+sendbyte(0b11011111,1);  
+__delay_ms(1000);
+     LCD_SetPos(5,0);
+sendbyte(0b10100000,1);  
+__delay_ms(1000);
+*/
+
+}
+}
+
+/*
+ 
+ * for (digit = 0; digit <= 9; digit++){    
+    digit_out(3, 2, 3);
 __delay_ms(1000);
 }
 digit2++;
-digit_out(digit2, 1, 1);
+digit_out(5, 1, 1);
 if (digit2 == 9) digit2 = 0;
-*/
-
-
-}
-}
-
  
+ */
  
