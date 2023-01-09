@@ -25,6 +25,7 @@
  #define rs RB2//
  #define e RB3//
 
+unsigned char t=0;//Флаг нажатия кнопки
  unsigned char alrm;
      unsigned char sece;//единицы секунд
      unsigned char secd;//десятки секунд
@@ -41,7 +42,7 @@
      unsigned char hourd;//десятки часов после преобразования
      //unsigned char houre_alar;//единицы часов будильника после преобразования
      //unsigned char hourd_alar;//десятки часов будильника после преобразования     
-     //unsigned char minee;//переменная для настройки минут 
+     unsigned char minee;//переменная для настройки минут 
      //unsigned char houree;//переменная для настройки часов
      //unsigned char minee_alar;//переменная для настройки минут 
      //unsigned char houree_alar;//переменная для настройки часов
@@ -321,11 +322,47 @@ sendbyte(0b00000011,1);
         break;        
 }  
 }
+//-----------------------переключение десятков минут----------------------------
+/*unsigned char vyb_raz (unsigned char u){
+    minee = u;
+    minee ++; 
+    if (u == 0b00001001) minee = 0b00010000;//если больше 9 записываем в переменную 10
+    if (u == 0b00011001) minee = 0b00100000;//если больше 19 записываем в переменную 20
+    if (u == 0b00101001) minee = 0b00110000;//если больше 29 записываем в переменную 30
+    if (u == 0b00111001) minee = 0b01000000;//если больше 39 записываем в переменную 40
+    if (u == 0b01001001) minee = 0b01010000;//если больше 49 записываем в переменную 50
+    if (u == 0b01011001) minee = 0b00000000;//если больше 59 то обнуляем   
+return minee;
+}*/
+//-----------------------обработка нажатия кнопки (изменение значения)---------- 
+/*void button (unsigned char u,unsigned char i){
+  unsigned int butcount=0;
+  
+  while(!RA0)
+  { 
+    if(butcount < 400)
+    {
+      butcount++;
+    }
+    else
+    {
+   if (i==1){//настройка минут
+    vyb_raz (u);
+    i2c_start ();//отправка посылки СТАРТ
+    I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
+    I2C_SendByte (0b00000001);//вызов регистра минут
+    I2C_SendByte (minee);//установка минут
+    i2c_stop (); 
+    } 
+ break;    
+    }
+  }
+}*/
 //--------------------------------------------------
 void main() // 
 {
 //unsigned char ch = 0;
-TRISA = 0b00000000;// 
+TRISA = 0b00000011;// 
 //PORTA = 0b00000000;
 TRISC=0b00000011;
 TRISB=0b00000000;
