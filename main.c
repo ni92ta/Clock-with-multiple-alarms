@@ -43,7 +43,7 @@ unsigned char t=0;//Флаг нажатия кнопки
      //unsigned char houre_alar;//единицы часов будильника после преобразования
      //unsigned char hourd_alar;//десятки часов будильника после преобразования     
      unsigned char minee;//переменная для настройки минут 
-     //unsigned char houree;//переменная для настройки часов
+     unsigned char houree;//переменная для настройки часов
      //unsigned char minee_alar;//переменная для настройки минут 
      //unsigned char houree_alar;//переменная для настройки часов
      //unsigned char control_2;//переменная для настройки часов
@@ -323,7 +323,7 @@ sendbyte(0b00000011,1);
 }  
 }
 //-----------------------переключение десятков минут----------------------------
-/*unsigned char vyb_raz (unsigned char u){
+unsigned char vyb_raz (unsigned char u){
     minee = u;
     minee ++; 
     if (u == 0b00001001) minee = 0b00010000;//если больше 9 записываем в переменную 10
@@ -333,20 +333,28 @@ sendbyte(0b00000011,1);
     if (u == 0b01001001) minee = 0b01010000;//если больше 49 записываем в переменную 50
     if (u == 0b01011001) minee = 0b00000000;//если больше 59 то обнуляем   
 return minee;
-}*/
+}
+//-----------------------переключение десятков часов----------------------------
+unsigned char vyb_raz_h (unsigned char u){
+    houree = u;
+    houree ++;
+    if (u == 0b00001001) houree = 0b00010000;//если больше 9 то записываем в переменную 10
+    if (u == 0b00011001) houree = 0b00100000;//если больше 19 то записываем в переменную 20
+    if (u == 0b00100011) houree = 0b00000000;//если больше 23 то обнуляем
+return houree;
+}
 //-----------------------обработка нажатия кнопки (изменение значения)---------- 
-/*void button (unsigned char u,unsigned char i){
+void button (unsigned char u,unsigned char i){
   unsigned int butcount=0;
-  
   while(!RA0)
   { 
-    if(butcount < 400)
+    if(butcount < 3000)
     {
       butcount++;
     }
     else
     {
-   if (i==1){//настройка минут
+   if (i == 1){//настройка минут
     vyb_raz (u);
     i2c_start ();//отправка посылки СТАРТ
     I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
@@ -354,10 +362,67 @@ return minee;
     I2C_SendByte (minee);//установка минут
     i2c_stop (); 
     } 
+    if (i == 2){//настройка часов
+    vyb_raz_h (u);
+    i2c_start ();//отправка посылки СТАРТ
+    I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
+    I2C_SendByte (0b00000010);//вызов регистра часов
+    I2C_SendByte (houree);//установка часов
+    i2c_stop (); 
+    }
  break;    
     }
   }
-}*/
+}
+//--------------------------------------------------
+void clk_out (void){//
+    unsigned int butcount=0;
+
+ while(!RA1)
+  { 
+ if(butcount < 3000)
+    {
+      butcount++;
+    }
+    else
+    {
+  t++;
+        if (t == 3) t = 0;//установка флага режима настройки
+      break;     
+    }
+// break;    
+    }    
+//--------------Первое нажатие настройка минут------
+    if (t == 1){
+button(min,1);
+    }
+//--------------Второе нажатие настройка часа-------
+    if (t == 2){
+button(hour,2); 
+    }
+    
+//--------------Вывод на дисплей--------------------
+digit_out(hourd, 0, 0);//hourd
+digit_out(houre, 2, 2);//houre
+LCD_SetPos(4,0);
+sendbyte(0b00101110,1);
+LCD_SetPos(4,1);
+sendbyte(0b11011111,1);
+digit_out(mind, 5, 5);
+digit_out(mine, 7, 7);
+LCD_SetPos(9,0);
+sendbyte(0b00101110,1);
+LCD_SetPos(9,1);
+sendbyte(0b11011111,1);
+digit_out(secd, 10, 10);
+digit_out(sece, 12, 12);
+LCD_SetPos(14,0);
+sendbyte(0b11101101,1);
+sendbyte(0b00110101,1);
+LCD_SetPos(14,1);
+sendbyte(0b01000011,1);
+sendbyte(0b10100000,1);    
+}
 //--------------------------------------------------
 void main() // 
 {
@@ -488,27 +553,9 @@ while(1)
     
    
 
-digit_out(hourd, 0, 0);//hourd
-digit_out(houre, 2, 2);//houre
-LCD_SetPos(4,0);
-sendbyte(0b00101110,1);
-LCD_SetPos(4,1);
-sendbyte(0b11011111,1);
-digit_out(mind, 5, 5);
-digit_out(mine, 7, 7);
-LCD_SetPos(9,0);
-sendbyte(0b00101110,1);
-LCD_SetPos(9,1);
-sendbyte(0b11011111,1);
-digit_out(secd, 10, 10);
-digit_out(sece, 12, 12);
-LCD_SetPos(14,0);
-sendbyte(0b11101101,1);
-sendbyte(0b00110101,1);
-LCD_SetPos(14,1);
-sendbyte(0b01000011,1);
-sendbyte(0b10100000,1);
-     
+
+clk_out ();
+
 //__delay_ms(400);
 /*__delay_ms(5000);
 digit_out(6, 0, 0);
