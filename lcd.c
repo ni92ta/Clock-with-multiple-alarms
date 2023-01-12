@@ -33,9 +33,9 @@ sendbyteHalf(c);
 void LCD_Init()
 {
 __delay_ms(50);
-  sendbyte(0b00110000, 0);
+  sendbyte(0b00010000, 0);//
   __delay_us(4500);
-  sendbyte(0b00110000, 0);
+  sendbyte(0b00010000, 0);//
   __delay_us(4500);
  // sendbyte(0b00100000, 0);
  //__delay_us(200);
@@ -120,12 +120,12 @@ __delay_us(37);
 sendbyte(0b10000000,0);//Установить адрес DDRAM в 0
 __delay_us(37);
 }*/
-/*//--------------------------------------------------------------
+//--------------------------------------------------------------
 void LCD_Clear(void)
 {
   sendbyte(0x01, 0);
   __delay_us(1500);
-}*/
+}
 //--------------------------------------------------------------
 void LCD_SetPos(unsigned char x, unsigned char y)//
 {
