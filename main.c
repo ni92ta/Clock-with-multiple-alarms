@@ -26,6 +26,7 @@
  #define e RB3//
 
 unsigned char t=0;//Флаг нажатия кнопки
+unsigned char n;//Флаг очистки дисплея
  unsigned char alrm;
      unsigned char sece;//единицы секунд
      unsigned char secd;//десятки секунд
@@ -354,6 +355,7 @@ void button (unsigned char u,unsigned char i){
     }
     else
     {
+       
    if (i == 1){//настройка минут
     vyb_raz (u);
     i2c_start ();//отправка посылки СТАРТ
@@ -386,6 +388,7 @@ void clk_out (void){//
     }
     else
     {
+      LCD_Clear();
   t++;
         if (t == 3) t = 0;//установка флага режима настройки
       break;     
@@ -393,15 +396,64 @@ void clk_out (void){//
 // break;    
     }    
 //--------------Первое нажатие настройка минут------
+     
     if (t == 1){
+    /*if (n == 0){
+        LCD_Clear();
+        n = 1;
+    }  */  
 button(min,1);
+digit_out(mind, 5, 5);
+digit_out(mine, 7, 7);
+LCD_SetPos(10,1);
+sendbyte(0b01001101,1);//М
+sendbyte(0b10111000,1);//и
+sendbyte(0b10111101,1);//н
+sendbyte(0b01111001,1);//у
+sendbyte(0b10111111,1);//т
+sendbyte(0b11000011,1);//ы
     }
 //--------------Второе нажатие настройка часа-------
     if (t == 2){
-button(hour,2); 
+        n = 0;
+button(hour,2);
+digit_out(hourd, 0, 0);//hourd
+digit_out(houre, 2, 2);//houre
+LCD_SetPos(4,0);
+sendbyte(0b00101110,1);
+LCD_SetPos(4,1);
+sendbyte(0b11011111,1);
+sendbyte(0b10101011,1);//Ч
+sendbyte(0b01100001,1);//а
+sendbyte(0b01100011,1);//с
+sendbyte(0b11000011,1);//ы
     }
-    
+//--------------Третье нажатие настройка минут будильника-------
+    if (t == 3){
+//button(hour,2);
+        digit_out(hourd, 0, 0);//hourd
+digit_out(houre, 2, 2);//houre
+LCD_SetPos(4,0);
+sendbyte(0b00101110,1);
+LCD_SetPos(4,1);
+sendbyte(0b11011111,1);
+digit_out(mind, 5, 5);
+digit_out(mine, 7, 7);
+LCD_SetPos(9,0);
+sendbyte(0b00101110,1);
+LCD_SetPos(9,1);
+sendbyte(0b11011111,1);
+digit_out(secd, 10, 10);
+digit_out(sece, 12, 12);
+LCD_SetPos(14,0);
+sendbyte(0b11101101,1);
+sendbyte(0b00110101,1);
+LCD_SetPos(14,1);
+sendbyte(0b01000011,1);
+sendbyte(0b10100000,1);
+    }    
 //--------------Вывод на дисплей--------------------
+if (t == 0){    
 digit_out(hourd, 0, 0);//hourd
 digit_out(houre, 2, 2);//houre
 LCD_SetPos(4,0);
@@ -421,7 +473,8 @@ sendbyte(0b11101101,1);
 sendbyte(0b00110101,1);
 LCD_SetPos(14,1);
 sendbyte(0b01000011,1);
-sendbyte(0b10100000,1);    
+sendbyte(0b10100000,1);
+}
 }
 //--------------------------------------------------
 void main() // 
