@@ -48,17 +48,18 @@ unsigned char n;//Флаг очистки дисплея
      //unsigned char minee_alar;//переменная для настройки минут 
      //unsigned char houree_alar;//переменная для настройки часов
      //unsigned char control_2;//переменная для настройки часов
-     /*unsigned char Days;//переменная числа до преобразования
-     unsigned char Daysset;//переменная для настройки числа
+     //unsigned char Days;//переменная числа до преобразования
+     //unsigned char Daysset;//переменная для настройки числа
      unsigned char Weekdays;//переменная дня недели до преобразования
-     //unsigned char Weekdaysset;//переменная для настройки дня недели
-     unsigned char Months;//переменная месяца до преобразования
+     unsigned char Weekdaysset;//переменная для настройки дня недели
+     unsigned char Weekdays_pr;//переменная дня недели после преобразования
+     /*unsigned char Months;//переменная месяца до преобразования
      unsigned char Monthsset;//переменная для настройки месяца
      unsigned char Years;//переменная года до преобразования
      unsigned char Yearsset;//переменная для настройки года
      unsigned char Days_pre;//переменная числа после преобразования(единицы)
      unsigned char Days_prd;//переменная числа после преобразования(десятки)
-     unsigned char Weekdays_pr;//переменная дня недели после преобразования
+     
      unsigned char Months_pre;//переменная месяца после преобразования(единицы)
      unsigned char Months_prd;//переменная месяца после преобразования(десятки)
      //unsigned char Months_pr;//переменная месяца после преобразования
@@ -372,6 +373,16 @@ void button (unsigned char u,unsigned char i){
     I2C_SendByte (houree);//установка часов
     i2c_stop (); 
     }
+       if (i == 4){//настройка дня недели
+    //vyb_raz_h (u);
+           u ++;
+           if (u > 0b00000111) u =0;
+    i2c_start ();//отправка посылки СТАРТ
+    I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
+    I2C_SendByte (0b00000011);//вызов регистра дня недели
+    I2C_SendByte (u);//установка часов
+    i2c_stop (); 
+    }
  break;    
     }
   }
@@ -390,7 +401,7 @@ void clk_out (void){//
     {
       LCD_Clear();
   t++;
-        if (t == 3) t = 0;//установка флага режима настройки
+        if (t == 5) t = 0;//установка флага режима настройки
       break;     
     }
 // break;    
@@ -431,8 +442,8 @@ sendbyte(0b11000011,1);//ы
 //--------------Третье нажатие настройка минут будильника-------
     if (t == 3){
 //button(hour,2);
-        digit_out(hourd, 0, 0);//hourd
-digit_out(houre, 2, 2);//houre
+       // digit_out(hourd, 0, 0);//hourd
+/*digit_out(houre, 2, 2);//houre
 LCD_SetPos(4,0);
 sendbyte(0b00101110,1);
 LCD_SetPos(4,1);
@@ -450,8 +461,36 @@ sendbyte(0b11101101,1);
 sendbyte(0b00110101,1);
 LCD_SetPos(14,1);
 sendbyte(0b01000011,1);
-sendbyte(0b10100000,1);
-    }    
+sendbyte(0b10100000,1);*/
+    } 
+    //--------------Третье нажатие настройка дня недели-------
+    if (t == 4){
+button(Weekdays,4);
+sendbyte(0b11100000,1);//Д
+sendbyte(0b01100101,1);//е
+sendbyte(0b10111101,1);//н
+sendbyte(0b11000100,1);//ь
+sendbyte(0b00100000,1);//_
+sendbyte(0b10111101,1);//н
+sendbyte(0b01100101,1);//е
+sendbyte(0b11100011,1);//д
+sendbyte(0b01100101,1);//е
+sendbyte(0b10111011,1);//л
+sendbyte(0b10111000,1);//и
+switch (Weekdays){
+    case 7:
+   LCD_SetPos(14,1);
+sendbyte(0b01000011,1);
+sendbyte(0b10100000,1);     
+        break;
+    default :
+ LCD_SetPos(14,1);
+sendbyte(0b10111101,1);
+sendbyte(0b10111101,1);        
+        break;
+}
+ 
+    }   
 //--------------Вывод на дисплей--------------------
 if (t == 0){    
 digit_out(hourd, 0, 0);//hourd
@@ -576,10 +615,9 @@ while(1)
       I2C_SendByte (dev_addrr);//адрес часовой микросхемы - чтение
       sec = I2C_ReadByte();//чтение секунд
       min = I2C_ReadByte();//чтение минут
-      hour = I2C_ReadByte_last();//чтение часов
-      /*Days = I2C_ReadByte();//чтение числа
-      Weekdays = I2C_ReadByte();//чтение дня недели
-      Months = I2C_ReadByte();//чтение месяца
+      hour = I2C_ReadByte();//чтение часов
+      Weekdays = I2C_ReadByte_last();//чтение дня недели
+      /*Months = I2C_ReadByte();//чтение месяца
       Years = I2C_ReadByte();//чтение года
       min_alar = I2C_ReadByte();//чтение минут будильника
       hour_alar = I2C_ReadByte_last();//чтение часов будильника*/
@@ -590,7 +628,8 @@ while(1)
       mine = RTC_ConvertFromDec(min);
       mind = RTC_ConvertFromDecd(min,0);
       houre = RTC_ConvertFromDec(hour);
-      hourd = RTC_ConvertFromDecd(hour,1); 
+      hourd = RTC_ConvertFromDecd(hour,1);
+      Weekdays_pr = RTC_ConvertFromDec(Weekdays);
      /* mine_alar = RTC_ConvertFromDec(min_alar);
       mind_alar = RTC_ConvertFromDecd(min_alar,0);
       houre_alar = RTC_ConvertFromDec(hour_alar);
