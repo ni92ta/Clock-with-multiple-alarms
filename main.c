@@ -28,6 +28,8 @@
 unsigned char t=0;//Флаг нажатия кнопки
 unsigned char n;//Флаг очистки дисплея
  unsigned char alrm;
+ unsigned char DAY_1;
+ unsigned char DAY_2;
      unsigned char sece;//единицы секунд
      unsigned char secd;//десятки секунд
      unsigned char sec;//секунды до преобразования
@@ -345,6 +347,15 @@ unsigned char vyb_raz_h (unsigned char u){
     if (u == 0b00100011) houree = 0b00000000;//если больше 23 то обнуляем
 return houree;
 }
+//-----------------------переключение дня недели----------------------------
+/*unsigned char vyb_raz_DAY (unsigned char u){
+    houree = u;
+    houree ++;
+    if (u == 0b00001001) houree = 0b00010000;//если больше 9 то записываем в переменную 10
+    if (u == 0b00011001) houree = 0b00100000;//если больше 19 то записываем в переменную 20
+    if (u == 0b00100011) houree = 0b00000000;//если больше 23 то обнуляем
+return houree;
+}*/
 //-----------------------обработка нажатия кнопки (изменение значения)---------- 
 void button (unsigned char u,unsigned char i){
   unsigned int butcount=0;
@@ -374,13 +385,13 @@ void button (unsigned char u,unsigned char i){
     i2c_stop (); 
     }
        if (i == 4){//настройка дня недели
-    //vyb_raz_h (u);
+    //vyb_raz_DAY (u);
            u ++;
-           if (u > 0b00000111) u =0;
+           if (u > 0b00000111) u = 0;
     i2c_start ();//отправка посылки СТАРТ
     I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
     I2C_SendByte (0b00000011);//вызов регистра дня недели
-    I2C_SendByte (u);//установка часов
+    I2C_SendByte (u);//установка дня недели
     i2c_stop (); 
     }
  break;    
@@ -478,18 +489,62 @@ sendbyte(0b01100101,1);//е
 sendbyte(0b10111011,1);//л
 sendbyte(0b10111000,1);//и
 switch (Weekdays){
+    case 1:
+  //LCD_SetPos(14,1);
+//sendbyte(0b10101000,1);//П
+DAY_1 = 0b10101000;
+//sendbyte(0b01001000,1);//Н
+DAY_2 = 0b01001000;
+        break;
+    case 2:
+   //LCD_SetPos(14,1);
+//sendbyte(0b1000010,1);//В
+DAY_1 = 0b1000010;
+//sendbyte(0b01010100,1);//Т
+DAY_2 = 0b01010100;
+        break;
+    case 3:
+   //LCD_SetPos(14,1);
+//sendbyte(0b01000011,1);//С
+DAY_1 = 0b01000011;
+//sendbyte(0b01010000,1);//Р
+DAY_2 = 01010000;
+        break;
+    case 4:
+   //LCD_SetPos(14,1);
+//sendbyte(0b10101011,1);//Ч
+DAY_1 = 0b10101011;
+//sendbyte(0b01010100,1);//Т
+DAY_2 = 0b01010100;
+        break;
+    case 5:
+   //LCD_SetPos(14,1);
+//sendbyte(0b10101000,1);//П
+DAY_1 = 0b10101000;
+//sendbyte(0b01010100,1);//Т
+DAY_2 = 0b01010100;
+        break;    
+    case 6:
+   //LCD_SetPos(14,1);
+//sendbyte(0b01000011,1);//С
+DAY_1 = 0b01000011;
+//sendbyte(0b10100000,1);//Б
+DAY_2 = 0b10100000;
+        break;    
     case 7:
-   LCD_SetPos(14,1);
-sendbyte(0b01000011,1);
-sendbyte(0b10100000,1);     
+  //LCD_SetPos(14,1);
+//sendbyte(0b1000010,1);//В
+DAY_1 = 0b1000010;
+//sendbyte(0b01000011,1);//С
+DAY_2 = 0b01000011;
         break;
-    default :
- LCD_SetPos(14,1);
-sendbyte(0b10111101,1);
-sendbyte(0b10111101,1);        
-        break;
+
+
+
 }
- 
+ LCD_SetPos(14,1);
+sendbyte(DAY_1,1);
+sendbyte(DAY_2,1);
     }   
 //--------------Вывод на дисплей--------------------
 if (t == 0){    
@@ -511,8 +566,8 @@ LCD_SetPos(14,0);
 sendbyte(0b11101101,1);
 sendbyte(0b00110101,1);
 LCD_SetPos(14,1);
-sendbyte(0b01000011,1);
-sendbyte(0b10100000,1);
+sendbyte(DAY_1,1);//
+sendbyte(DAY_2,1);//
 }
 }
 //--------------------------------------------------
