@@ -1,7 +1,7 @@
 /*
  * File:   newmain.c
  * Author: Никита
- *Часы на pic16f73  и PCF8583
+ *Часы на pic16f73  и DS1307
  * Created on 3 января 2020 г., 20:00
  */
 #include <xc.h>
@@ -28,8 +28,8 @@
 unsigned char t=0;//Флаг нажатия кнопки
 unsigned char n;//Флаг очистки дисплея
  unsigned char alrm;
- unsigned char DAY_1;
- unsigned char DAY_2;
+ unsigned char DAY_1 = 0b10101000;//ПН
+ unsigned char DAY_2 = 0b01001000;//ВТ
      unsigned char sece;//единицы секунд
      unsigned char secd;//десятки секунд
      unsigned char sec;//секунды до преобразования
@@ -71,7 +71,7 @@ unsigned char n;//Флаг очистки дисплея
   //char str01[30]={'\0'};
   //char str03[7]={'\0'};
 //------------------------------------------------------------------------------
-void PCF8583init (void){//инициализация микросхемы
+void DS1307init (void){//инициализация микросхемы
         __delay_ms(10);
    // unsigned char control_3; 
      /*   i2c_start();//отправка посылки СТАРТ
@@ -89,8 +89,8 @@ void PCF8583init (void){//инициализация микросхемы
     I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
     I2C_SendByte (0b00000000);//вызов регистра секунд (0b00000010)
     I2C_SendByte (0b01000000);//установка секунд 40
-    I2C_SendByte (0b00000000);//установка минут 00
-    I2C_SendByte (0b11000000);//установка часов 00
+    I2C_SendByte (0b01011001);//установка минут 00
+    I2C_SendByte (0b00100011);//установка часов 00  0b00100011
     /*I2C_SendByte (0b00000001);//установка числа месяца 15
     I2C_SendByte (0b00000001);//установка дня недели 1
     I2C_SendByte (0b00000001);//установка месяца 1
@@ -361,7 +361,7 @@ void button (unsigned char u,unsigned char i){
   unsigned int butcount=0;
   while(!RA0)
   { 
-    if(butcount < 3000)
+    if(butcount < 4000)
     {
       butcount++;
     }
@@ -385,26 +385,62 @@ void button (unsigned char u,unsigned char i){
     i2c_stop (); 
     }
        if (i == 4){//настройка дня недели
-    //vyb_raz_DAY (u);
-           u ++;
-           if (u > 0b00000111) u = 0;
+           //Weekdays = u;
+           Weekdays ++;
+           if (Weekdays > 0b00000110) u = 0;
     i2c_start ();//отправка посылки СТАРТ
     I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
     I2C_SendByte (0b00000011);//вызов регистра дня недели
-    I2C_SendByte (u);//установка дня недели
-    i2c_stop (); 
+    I2C_SendByte (Weekdays);//установка дня недели
+    i2c_stop ();
+    
+    
+    
     }
  break;    
     }
   }
 }
 //--------------------------------------------------
+void Day_Switch (void){
+switch (Weekdays){
+    case 0:
+DAY_1 = 0b10101000;//П
+DAY_2 = 0b01001000;//Н
+        break;
+    case 1:
+DAY_1 = 0b01000010;//В
+DAY_2 = 0b01010100;//Т
+        break;
+    case 2:
+DAY_1 = 0b01000011;//С
+DAY_2 = 0b01010000;//Р
+        break;
+    case 3:
+DAY_1 = 0b10101011;//Ч
+DAY_2 = 0b01010100;//Т
+        break;
+    case 4:
+DAY_1 = 0b10101000;//П
+DAY_2 = 0b01010100;//Т
+        break;    
+    case 5:
+DAY_1 = 0b01000011;//С
+DAY_2 = 0b10100000;//Б
+        break;    
+    case 6:
+DAY_1 = 0b01000010;//В
+DAY_2 = 0b01000011;//С
+        break;
+}    
+}
+//--------------------------------------------------
 void clk_out (void){//
-    unsigned int butcount=0;
+    unsigned int butcount = 0;
 
  while(!RA1)
   { 
- if(butcount < 3000)
+ if(butcount < 4000)
     {
       butcount++;
     }
@@ -420,10 +456,6 @@ void clk_out (void){//
 //--------------Первое нажатие настройка минут------
      
     if (t == 1){
-    /*if (n == 0){
-        LCD_Clear();
-        n = 1;
-    }  */  
 button(min,1);
 digit_out(mind, 5, 5);
 digit_out(mine, 7, 7);
@@ -488,66 +520,77 @@ sendbyte(0b11100011,1);//д
 sendbyte(0b01100101,1);//е
 sendbyte(0b10111011,1);//л
 sendbyte(0b10111000,1);//и
+Day_Switch ();
+/*
 switch (Weekdays){
+    case 0:
+DAY_1 = 0b10101000;//П
+DAY_2 = 0b01001000;//Н
+        break;
     case 1:
-  //LCD_SetPos(14,1);
-//sendbyte(0b10101000,1);//П
-DAY_1 = 0b10101000;
-//sendbyte(0b01001000,1);//Н
-DAY_2 = 0b01001000;
+DAY_1 = 0b01000010;//В
+DAY_2 = 0b01010100;//Т
         break;
     case 2:
-   //LCD_SetPos(14,1);
-//sendbyte(0b1000010,1);//В
-DAY_1 = 0b1000010;
-//sendbyte(0b01010100,1);//Т
-DAY_2 = 0b01010100;
+DAY_1 = 0b01000011;//С
+DAY_2 = 0b01010000;//Р
         break;
     case 3:
-   //LCD_SetPos(14,1);
-//sendbyte(0b01000011,1);//С
-DAY_1 = 0b01000011;
-//sendbyte(0b01010000,1);//Р
-DAY_2 = 01010000;
+DAY_1 = 0b10101011;//Ч
+DAY_2 = 0b01010100;//Т
         break;
     case 4:
-   //LCD_SetPos(14,1);
-//sendbyte(0b10101011,1);//Ч
-DAY_1 = 0b10101011;
-//sendbyte(0b01010100,1);//Т
-DAY_2 = 0b01010100;
-        break;
+DAY_1 = 0b10101000;//П
+DAY_2 = 0b01010100;//Т
+        break;    
     case 5:
-   //LCD_SetPos(14,1);
-//sendbyte(0b10101000,1);//П
-DAY_1 = 0b10101000;
-//sendbyte(0b01010100,1);//Т
-DAY_2 = 0b01010100;
+DAY_1 = 0b01000011;//С
+DAY_2 = 0b10100000;//Б
         break;    
     case 6:
-   //LCD_SetPos(14,1);
-//sendbyte(0b01000011,1);//С
-DAY_1 = 0b01000011;
-//sendbyte(0b10100000,1);//Б
-DAY_2 = 0b10100000;
-        break;    
-    case 7:
-  //LCD_SetPos(14,1);
-//sendbyte(0b1000010,1);//В
-DAY_1 = 0b1000010;
-//sendbyte(0b01000011,1);//С
-DAY_2 = 0b01000011;
+DAY_1 = 0b01000010;//В
+DAY_2 = 0b01000011;//С
         break;
-
-
-
-}
- LCD_SetPos(14,1);
+}*/
+LCD_SetPos(14,1);
 sendbyte(DAY_1,1);
 sendbyte(DAY_2,1);
     }   
 //--------------Вывод на дисплей--------------------
-if (t == 0){    
+if (t == 0){
+    Day_Switch ();
+    /*
+switch (Weekdays){
+    case 0:
+DAY_1 = 0b10101000;//П
+DAY_2 = 0b01001000;//Н
+        break;
+    case 1:
+DAY_1 = 0b01000010;//В
+DAY_2 = 0b01010100;//Т
+        break;
+    case 2:
+DAY_1 = 0b01000011;//С
+DAY_2 = 0b01010000;//Р
+        break;
+    case 3:
+DAY_1 = 0b10101011;//Ч
+DAY_2 = 0b01010100;//Т
+        break;
+    case 4:
+DAY_1 = 0b10101000;//П
+DAY_2 = 0b01010100;//Т
+        break;    
+    case 5:
+DAY_1 = 0b01000011;//С
+DAY_2 = 0b10100000;//Б
+        break;    
+    case 6:
+DAY_1 = 0b01000010;//В
+DAY_2 = 0b01000011;//С
+        break;
+}*/
+    
 digit_out(hourd, 0, 0);//hourd
 digit_out(houre, 2, 2);//houre
 LCD_SetPos(4,0);
@@ -568,12 +611,18 @@ sendbyte(0b00110101,1);
 LCD_SetPos(14,1);
 sendbyte(DAY_1,1);//
 sendbyte(DAY_2,1);//
+
+/*if (hourd == 2){
+    if (houre == 4 ){
+        hourd, houre = 0;
+    }
+}*/
+
 }
 }
 //--------------------------------------------------
 void main() // 
 {
-//unsigned char ch = 0;
 TRISA = 0b00000011;// 
 //PORTA = 0b00000000;
 TRISC=0b00000011;
@@ -590,49 +639,42 @@ for (unsigned char x = 0; x <= 7; x++){
       //__delay_us(40);
 }
 */
-PCF8583init();
+DS1307init();
+__delay_us(40);
 LCD_Init();
 __delay_us(40);
 unsigned char x;
   sendbyte(0b01000000,0);//sets CGRAM address
-  for (x = 0; x<= 7; x++){
+  for (x = 0; x <= 7; x++){
     sendbyte(str01[x],1);
-      //__delay_us(40);
 }
    //__delay_us(40);
     for (x = 0; x <= 7; x++){
     sendbyte(str02[x],1);
-   //__delay_us(40);
 }
    //__delay_us(40);
-    for (x = 0; x<= 7; x++){
+    for (x = 0; x <= 7; x++){
     sendbyte(str03[x],1);
-      //__delay_us(40);
 }
    //__delay_us(40);
     for (x = 0; x<= 7; x++){
     sendbyte(str04[x],1);
-      //__delay_us(40);
 }
    //__delay_us(40);
     for (x = 0; x<= 7; x++){
     sendbyte(str05[x],1);
-      //__delay_us(40);
 }
    //__delay_us(40);
     for (x = 0; x<= 7; x++){
     sendbyte(str06[x],1);
-      //__delay_us(40);
 }
    //__delay_us(40);
     for (x = 0; x<= 7; x++){
     sendbyte(str07[x],1);
-      //__delay_us(40);
 }
    //__delay_us(40);
     for (x = 0; x<= 7; x++){
     sendbyte(str08[x],1);
-      //__delay_us(40);
 }
    //__delay_ms(10);
 //LCD_Init();
@@ -657,11 +699,8 @@ for(l=9;l<25;l++)
 }
 sendbytee(0b00000001,1);//очистка дисплея*/
 //----------------------------------------
-    unsigned char digit;
-    unsigned char digit2 = 0;
 while(1)
-{
-  
+{ 
   i2c_start();//отправка посылки СТАРТ
       I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
       I2C_SendByte (0b00000000);//вызов регистра секунд (0b00000010)
@@ -684,7 +723,7 @@ while(1)
       mind = RTC_ConvertFromDecd(min,0);
       houre = RTC_ConvertFromDec(hour);
       hourd = RTC_ConvertFromDecd(hour,1);
-      Weekdays_pr = RTC_ConvertFromDec(Weekdays);
+      Weekdays = RTC_ConvertFromDec(Weekdays);
      /* mine_alar = RTC_ConvertFromDec(min_alar);
       mind_alar = RTC_ConvertFromDecd(min_alar,0);
       houre_alar = RTC_ConvertFromDec(hour_alar);
@@ -696,9 +735,6 @@ while(1)
       Months_prd = RTC_ConvertFromDecd(Months,2);
       Years_pre = RTC_ConvertFromDec(Years);
       Years_prd = RTC_ConvertFromDecd(Years,0);   */
-    
-    
-   
 
 
 clk_out ();
