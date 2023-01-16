@@ -33,9 +33,9 @@ sendbyteHalf(c);
 void LCD_Init()
 {
 __delay_ms(50);
-  sendbyte(0b00100000, 0);//0b00110000
+  sendbyte(0b00110000, 0);//0b00110000
   __delay_us(4500);//0b00110000
-  sendbyte(00100000, 0);//
+  sendbyte(00110000, 0);//
   __delay_us(4500);
  // sendbyte(0b11000000, 0);//закомментировано
  __delay_us(200);//закомментировано
