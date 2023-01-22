@@ -24,10 +24,10 @@
 
  #define rs RB2//
  #define e RB3//
-unsigned char alarm_1;
-unsigned char alarm_2;
-unsigned char alarm_3;
-unsigned char alarm_4;
+unsigned char alarm_1 = 0b00110000;
+unsigned char alarm_2 = 0b00110000;
+unsigned char alarm_3 = 0b00110000;
+unsigned char alarm_4 = 0b00110000;
 unsigned char t=0;//Флаг нажатия кнопки
 unsigned char n;//Флаг очистки дисплея
 unsigned char alarm;
@@ -399,11 +399,18 @@ void button (unsigned char u,unsigned char i){
     I2C_SendByte (Weekdays);//установка дня недели
     i2c_stop ();
     }
-         if (i == 4){//настройка будильников
-
-      //  alarm_number ++;
-       // if (alarm_number > 0b00110101)alarm_number = 0b00110001;         
-
+         if (i == 4){//настройка будильника - часы
+             alarm_2 ++;
+             if (alarm_2 == 0b00111001){//9
+              alarm_1 = 0b00110001;//1
+              //alarm_2 = 0b00110000;
+              //if (alarm_1 = 0b00110001 ){
+              //alarm_1 = 0b00110010;//2
+              //alarm_2 = 0b00110000;//0   
+              }//1_9
+             //}
+             //if ()  & alarm_2 = 0b0b00111001
+        
 
     } 
  break;    
@@ -462,6 +469,10 @@ LCD_SetPos(14,0);
 sendbyte(0b11101101,1);
 sendbyte(o,1);
 }
+//-------------------Настройка времени будильника---
+/*void alarm_clock (unsigned char time){
+    
+}*/
 //--------------------------------------------------
 void clk_out (void){//
     unsigned int butcount = 0;
@@ -476,7 +487,7 @@ void clk_out (void){//
     {
       LCD_Clear();
   t++;
-        if (t == 9) t = 0;//установка флага режима настройки
+        if (t > 5) t = 0;//установка флага режима настройки
       break;     
     }
 // break;    
@@ -527,37 +538,70 @@ LCD_SetPos(14,1);
 sendbyte(DAY_1,1);
 sendbyte(DAY_2,1);
     }
-//--------------Четвёртое нажатие настройка будильника №1-------
+//--------------Четвёртое нажатие настройка будильника , часы-------
     if (t == 4){
-        
-        alarm_number = 0b00110001;
+       // lcd_mask (alarm_number);
+        //alarm_number = 0b00110001;
         LCD_SetPos(0,0);
-        //button(alarm_number,4);
-        lcd_mask (alarm_number);
+        button(alarm_number,4);
+sendbyte(0b10100000,1);//Б
+sendbyte(0b01111001,1);//у
+sendbyte(0b11100011,1);//д
+sendbyte(0b10111000,1);//и
+sendbyte(0b10111011,1);//л
+sendbyte(0b11000100,1);//ь
+sendbyte(0b10111101,1);//н
+sendbyte(0b10111000,1);//и
+sendbyte(0b10111010,1);//к
+LCD_SetPos(14,0);
+sendbyte(0b11101101,1);
+sendbyte(0b11111111,1);
         LCD_SetPos(0,1);
-        sendbyte(0b00110000,1);
-        sendbyte(0b00110001,1);
-        sendbyte(0b00111010,1);
-        sendbyte(0b00110011,1);
-        sendbyte(0b00110100,1);
-        alarm_1 = 0b00110000;
-        alarm_2 = 0b00110001;
-        alarm_3 = 0b00110011;
-        alarm_4 = 0b00110100;
+sendbyte(0b10101011,1);//Ч
+sendbyte(0b01100001,1);//а
+sendbyte(0b01100011,1);//с
+sendbyte(0b11000011,1);//ы
+        LCD_SetPos(5,1);
+        sendbyte(alarm_1,1);
+        sendbyte(alarm_2,1);
+        
+       
       
             
      }
 //--------------Пятое нажатие настройка будильника №2-------
     if (t == 5){
-        alarm_number = 0b00110010;
-        lcd_mask (alarm_number);
+        LCD_SetPos(0,0);
+        //button(alarm_number,4);
+sendbyte(0b10100000,1);//Б
+sendbyte(0b01111001,1);//у
+sendbyte(0b11100011,1);//д
+sendbyte(0b10111000,1);//и
+sendbyte(0b10111011,1);//л
+sendbyte(0b11000100,1);//ь
+sendbyte(0b10111101,1);//н
+sendbyte(0b10111000,1);//и
+sendbyte(0b10111010,1);//к
+LCD_SetPos(14,0);
+sendbyte(0b11101101,1);
+sendbyte(0b11111111,1);
+        LCD_SetPos(0,1);
+sendbyte(0b01001101,1);//М
+sendbyte(0b10111000,1);//и
+sendbyte(0b10111101,1);//н
+sendbyte(0b01111001,1);//у
+sendbyte(0b10111111,1);//т
+sendbyte(0b11000011,1);//ы
+        LCD_SetPos(7,1);
+        sendbyte(alarm_3,1);
+        sendbyte(alarm_4,1);
 
-    }
+    }/*
 //--------------шестое нажатие настройка будильника №3-------
     if (t == 6){
         alarm_number = 0b00110011;
         lcd_mask (alarm_number);
-
+RA3 = 1;
     }
 //--------------Седьмое нажатие настройка будильника №4-------
     if (t == 7){
@@ -569,8 +613,8 @@ sendbyte(DAY_2,1);
     if (t == 8){
         alarm_number = 0b00110101;
         lcd_mask (alarm_number);
-
-    }  
+        RA3 = 0;
+    }*/  
 
 //--------------Вывод на дисплей--------------------
 if (t == 0){
@@ -601,10 +645,10 @@ sendbyte(DAY_2,1);//
 //--------------------------------------------------
 void main() // 
 {
-TRISA = 0b00000011;// 
+TRISA = 0b00000111;//вход на кнопки
 //PORTA = 0b00000000;
-TRISC=0b00000011;
-TRISB=0b00000000;
+TRISC=0b00000011;//линия I2C
+TRISB=0b00000000;//линия управления LCD
 ADON = 0;//ADC OFF
 PCFG2 = 1;//0100 AN7:AN1 ?????, AN0 ??????, ??????? = Vdd, ?????- = Vss
 PCFG1 = 1;
