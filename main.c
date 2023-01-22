@@ -45,11 +45,11 @@ unsigned char alarm;
      //unsigned char mine_alar;//единицы минут будильника после преобразования
      //unsigned char mind_alar;//десятки минут будильника после преобразования     
      unsigned char hour;//часы до преобразования
-     //unsigned char hour_alar;//часы будильника до преобразования
+     unsigned char hour_alar;//часы будильника до преобразования
      unsigned char houre;//единицы часов после преобразования
      unsigned char hourd;//десятки часов после преобразования
-     //unsigned char houre_alar;//единицы часов будильника после преобразования
-     //unsigned char hourd_alar;//десятки часов будильника после преобразования     
+     unsigned char houre_alar = 0b00110000;//единицы часов будильника после преобразования
+     unsigned char hourd_alar = 0b00110000;//десятки часов будильника после преобразования     
      unsigned char minee;//переменная для настройки минут 
      unsigned char houree;//переменная для настройки часов
      //unsigned char minee_alar;//переменная для настройки минут 
@@ -400,21 +400,7 @@ void button (unsigned char u,unsigned char i){
     i2c_stop ();
     }
          if (i == 4){//настройка будильника - часы
-             alarm_2 ++;
-             if (alarm_2 > 0b00111001){
-             alarm_1 = 0b00110001;//если единицы часов == 9, то равно 10 часов
-             alarm_2 = 0b00110000;
-             } 
-             if (alarm_1 + alarm_2 > 0b01101010){
-                 alarm_1 = 0b00110010;
-                 alarm_2 = 0b00110000; 
-             }
-             /*if (alarm_1 = 0b00110010){
-                 if (alarm_2 = 0b00110100){
-                 alarm_1 = 0b00110000;
-                 alarm_2 = 0b00110000;    
-                 }
-             }*/
+vyb_raz_h (u);
 
         
 
@@ -546,10 +532,8 @@ sendbyte(DAY_2,1);
     }
 //--------------Четвёртое нажатие настройка будильника , часы-------
     if (t == 4){
-       // lcd_mask (alarm_number);
-        //alarm_number = 0b00110001;
+button(hour_alar,4);
         LCD_SetPos(0,0);
-        button(alarm_number,4);
 sendbyte(0b10100000,1);//Б
 sendbyte(0b01111001,1);//у
 sendbyte(0b11100011,1);//д
@@ -568,8 +552,8 @@ sendbyte(0b01100001,1);//а
 sendbyte(0b01100011,1);//с
 sendbyte(0b11000011,1);//ы
         LCD_SetPos(5,1);
-        sendbyte(alarm_1,1);
-        sendbyte(alarm_2,1);
+        sendbyte(hourd_alar,1);
+        sendbyte(houre_alar,1);
         
        
       
@@ -727,6 +711,8 @@ while(1)
       houre = RTC_ConvertFromDec(hour);
       hourd = RTC_ConvertFromDecd(hour,1);
       Weekdays = RTC_ConvertFromDec(Weekdays);
+      hourd_alar = RTC_ConvertFromDec(hour_alar);
+      houre_alar = RTC_ConvertFromDecd(hour_alar,1);
      /* mine_alar = RTC_ConvertFromDec(min_alar);
       mind_alar = RTC_ConvertFromDecd(min_alar,0);
       houre_alar = RTC_ConvertFromDec(hour_alar);
