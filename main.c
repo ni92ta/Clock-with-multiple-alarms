@@ -30,6 +30,7 @@ unsigned char alarm_3 = 0b00110000;
 unsigned char alarm_4 = 0b00110000;
 unsigned char t=0;//Флаг нажатия кнопки
 unsigned char n;//Флаг очистки дисплея
+unsigned char alarm_flag;//Флаг включения будильника
 unsigned char alarm;
  unsigned char alarm_set;
   unsigned char alarm_number = 0b00110001;
@@ -400,9 +401,24 @@ void button (unsigned char u,unsigned char i){
     i2c_stop ();
     }
          if (i == 4){//настройка будильника - часы
-vyb_raz_h (u);
 
-        
+             alarm_2 ++;
+                                          if (alarm_1 == 0b00110010 && alarm_2 == 0b00110100){//если часы > 23, то равно 00 часов
+                 alarm_1 = 0b00110000;
+                 alarm_2 = 0b00110000; 
+             }
+                if (alarm_1 + alarm_2 > 0b01101010){//если часы > 19, то равно 20 часов
+                 alarm_1 = 0b00110010;
+                 alarm_2 = 0b00110000; 
+             }
+
+             if (alarm_2 > 0b00111001){//если часы > 09, то равно 10 часов
+             alarm_1 = 0b00110001;
+             alarm_2 = 0b00110000;
+
+             } 
+             hour_alar = (alarm_1<<4) & alarm_2;
+
 
     } 
  break;    
@@ -552,8 +568,8 @@ sendbyte(0b01100001,1);//а
 sendbyte(0b01100011,1);//с
 sendbyte(0b11000011,1);//ы
         LCD_SetPos(5,1);
-        sendbyte(hourd_alar,1);
-        sendbyte(houre_alar,1);
+        sendbyte(alarm_1,1);
+        sendbyte(alarm_2,1);
         
        
       
@@ -725,10 +741,14 @@ while(1)
       Years_pre = RTC_ConvertFromDec(Years);
       Years_prd = RTC_ConvertFromDecd(Years,0);   */
 if (Weekdays > 0b00000110) Weekdays = 0;
-
+if (hour == 0 && min == 0 && sec == 0b00000010) alarm_flag = 0;  
 
 clk_out ();
-
+if (hour_alar == hour && alarm_flag == 0) RA3 = 1;
+if (!RA2){
+    RA3 = 0;
+    alarm_flag = 1;
+}
 //__delay_ms(400);
 /*__delay_ms(5000);
 digit_out(6, 0, 0);
