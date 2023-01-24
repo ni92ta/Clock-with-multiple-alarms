@@ -27,7 +27,7 @@
 unsigned char alarm_1 = 0b00110000;
 unsigned char alarm_2 = 0b00110000;
 unsigned char alarm_3 = 0b00110000;
-unsigned char alarm_4 = 0b00110000;
+unsigned char alarm_4 = 0b00110001;
 unsigned char t=0;//Флаг нажатия кнопки
 unsigned char n;//Флаг очистки дисплея
 unsigned char alarm_flag;//Флаг включения будильника
@@ -47,6 +47,7 @@ unsigned char alarm;
      //unsigned char mind_alar;//десятки минут будильника после преобразования     
      unsigned char hour;//часы до преобразования
      unsigned char hour_alar;//часы будильника до преобразования
+     unsigned char min_alar;//минуты будильника до преобразования
      unsigned char houre;//единицы часов после преобразования
      unsigned char hourd;//десятки часов после преобразования
      unsigned char houre_alar = 0b00110000;//единицы часов будильника после преобразования
@@ -403,7 +404,7 @@ void button (unsigned char u,unsigned char i){
          if (i == 4){//настройка будильника - часы
 
              alarm_2 ++;
-                                          if (alarm_1 == 0b00110010 && alarm_2 == 0b00110100){//если часы > 23, то равно 00 часов
+                if (alarm_1 == 0b00110010 && alarm_2 == 0b00110100){//если часы > 23, то равно 00 часов
                  alarm_1 = 0b00110000;
                  alarm_2 = 0b00110000; 
              }
@@ -415,12 +416,24 @@ void button (unsigned char u,unsigned char i){
              if (alarm_2 > 0b00111001){//если часы > 09, то равно 10 часов
              alarm_1 = 0b00110001;
              alarm_2 = 0b00110000;
-
              } 
-             hour_alar = (alarm_1<<4) & alarm_2;
-
-
+             //hour_alar = (alarm_1<<4) & alarm_2;
     } 
+          if (i == 5){//настройка будильника - минуты
+            alarm_4 ++;
+            if (alarm_4 == 0b00111010) {
+                alarm_4 = 0b00110000;
+                alarm_3 ++;
+            }
+            if (alarm_3 > 0b00110101){
+                alarm_4 = 0b00110000;
+                alarm_3 = 0b00110000;//
+            }
+             //min_alar = (alarm_3<<4) & alarm_4;          
+  
+          }
+   
+   
  break;    
     }
   }
@@ -577,8 +590,8 @@ sendbyte(0b11000011,1);//ы
      }
 //--------------Пятое нажатие настройка будильника №2-------
     if (t == 5){
-        LCD_SetPos(0,0);
-        //button(alarm_number,4);
+        button(alarm_number,5);
+        LCD_SetPos(0,0);  
 sendbyte(0b10100000,1);//Б
 sendbyte(0b01111001,1);//у
 sendbyte(0b11100011,1);//д
@@ -741,10 +754,23 @@ while(1)
       Years_pre = RTC_ConvertFromDec(Years);
       Years_prd = RTC_ConvertFromDecd(Years,0);   */
 if (Weekdays > 0b00000110) Weekdays = 0;
-if (hour == 0 && min == 0 && sec == 0b00000010) alarm_flag = 0;  
+if (hour == 0 && min == 0 && sec == 0b00000010) alarm_flag = 0;
+hour_alar = (((alarm_1 << 4) & 0b00110000)) | (alarm_2 & 0b00001111);// & alarm_2;
+//alarm_2 = alarm_2 & 0b00001111;
+//hour_alar = hour_alar | alarm_2;
+
+
+min_alar = (((alarm_3 << 4) & 0b00110000)) | (alarm_4 & 0b00001111);// & alarm_2;
+//alarm_4 = alarm_4 & 0b00001111;
+//min_alar = hour_alar | alarm_4;
+
+//hour_alar = alarm_1 & alarm_2;
+//min_alar = (alarm_3 <<4 ) & alarm_4;      
 
 clk_out ();
-if (hour_alar == hour && alarm_flag == 0) RA3 = 1;
+if (hour_alar == hour && alarm_flag == 0){
+    if (min_alar == min) RA3 = 1;
+}
 if (!RA2){
     RA3 = 0;
     alarm_flag = 1;
