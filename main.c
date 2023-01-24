@@ -727,10 +727,6 @@ while(1)
       min = I2C_ReadByte();//чтение минут
       hour = I2C_ReadByte();//чтение часов
       Weekdays = I2C_ReadByte_last();//чтение дня недели
-      /*Months = I2C_ReadByte();//чтение месяца
-      Years = I2C_ReadByte();//чтение года
-      min_alar = I2C_ReadByte();//чтение минут будильника
-      hour_alar = I2C_ReadByte_last();//чтение часов будильника*/
       i2c_stop (); 
 //--------------перевод значения времени в десятичный формат--------------------     
       sece = RTC_ConvertFromDec(sec);
@@ -742,30 +738,13 @@ while(1)
       Weekdays = RTC_ConvertFromDec(Weekdays);
       hourd_alar = RTC_ConvertFromDec(hour_alar);
       houre_alar = RTC_ConvertFromDecd(hour_alar,1);
-     /* mine_alar = RTC_ConvertFromDec(min_alar);
-      mind_alar = RTC_ConvertFromDecd(min_alar,0);
-      houre_alar = RTC_ConvertFromDec(hour_alar);
-      hourd_alar = RTC_ConvertFromDecd(hour_alar,0);   
-      Days_pre = RTC_ConvertFromDec(Days);
-      Days_prd = RTC_ConvertFromDecd(Days,1);
-      Weekdays_pr = RTC_ConvertFromDec(Weekdays);
-      Months_pre = RTC_ConvertFromDec(Months);
-      Months_prd = RTC_ConvertFromDecd(Months,2);
-      Years_pre = RTC_ConvertFromDec(Years);
-      Years_prd = RTC_ConvertFromDecd(Years,0);   */
+
 if (Weekdays > 0b00000110) Weekdays = 0;
 if (hour == 0 && min == 0 && sec == 0b00000010) alarm_flag = 0;
 hour_alar = (((alarm_1 << 4) & 0b00110000)) | (alarm_2 & 0b00001111);// & alarm_2;
-//alarm_2 = alarm_2 & 0b00001111;
-//hour_alar = hour_alar | alarm_2;
-
 
 min_alar = (((alarm_3 << 4) & 0b00110000)) | (alarm_4 & 0b00001111);// & alarm_2;
-//alarm_4 = alarm_4 & 0b00001111;
-//min_alar = hour_alar | alarm_4;
-
-//hour_alar = alarm_1 & alarm_2;
-//min_alar = (alarm_3 <<4 ) & alarm_4;      
+     
 
 clk_out ();
 if (hour_alar == hour && alarm_flag == 0){
@@ -775,40 +754,6 @@ if (!RA2){
     RA3 = 0;
     alarm_flag = 1;
 }
-//__delay_ms(400);
-/*__delay_ms(5000);
-digit_out(6, 0, 0);
-digit_out(7, 2, 2);
-LCD_SetPos(4,0);
-sendbytee(0b00101110,0);
-LCD_SetPos(4,1);
-sendbytee(0b11011111,0);
-digit_out(8, 5, 5);
-digit_out(9, 7, 7);
-LCD_SetPos(9,0);
-sendbytee(0b00101110,0);
-LCD_SetPos(9,1);
-sendbytee(0b11011111,0);
-digit_out(0, 10, 10);
-digit_out(1, 12, 12);*/
-//__delay_ms(5000);
-/*
-digit_out(4, 9, 9);    
-digit_out(5, 11, 11); 
-digit_out(6, 13, 13);
-digit_out(7, 15, 15);*/
-  
-  /*  LCD_SetPos(4,0);
-sendbyte(0b11011111,1);
-    __delay_ms(1000);
-     LCD_SetPos(5,1);
-sendbyte(0b11011111,1);  
-__delay_ms(1000);
-     LCD_SetPos(5,0);
-sendbyte(0b10100000,1);  
-__delay_ms(1000);
-*/
-
 }
 }
 
