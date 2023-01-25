@@ -8,16 +8,6 @@
 #include "newmain.h"
 #include "lcd.h"
 #include "I2C.h"
-//#include "string.h"
-//#include "stdio.h"
-//#include	<ctype.h>
-//#include	<stdlib.h>
-//#include	<stdarg.h>
-//#include	<conio.h>
-//#include	<sys.h>
-//#include	<math.h>
-//#include	<float.h>
-
 #define _XTAL_FREQ 3579000
 #define dev_addrw 0b11010000 //запись 0b10100000
 #define dev_addrr 0b11010001 //чтение 0b10100001
@@ -31,9 +21,7 @@ unsigned char alarm_4 = 0b00110001;
 unsigned char t=0;//Флаг нажатия кнопки
 unsigned char n;//Флаг очистки дисплея
 unsigned char alarm_flag;//Флаг включения будильника
-unsigned char alarm;
- unsigned char alarm_set;
-  unsigned char alarm_number = 0b00110001;
+unsigned char alarm_number = 0b00110001;
  unsigned char DAY_1 = 0b10101000;//ПН
  unsigned char DAY_2 = 0b01001000;//ВТ
      unsigned char sece;//единицы секунд
@@ -42,9 +30,7 @@ unsigned char alarm;
      unsigned char min;//минуты до преобразования
      //unsigned char min_alar;//минуты будильника до преобразования
      unsigned char mine;//единицы минут после преобразования
-     unsigned char mind;//десятки минут после преобразования
-     //unsigned char mine_alar;//единицы минут будильника после преобразования
-     //unsigned char mind_alar;//десятки минут будильника после преобразования     
+     unsigned char mind;//десятки минут после преобразования 
      unsigned char hour;//часы до преобразования
      unsigned char hour_alar;//часы будильника до преобразования
      unsigned char min_alar;//минуты будильника до преобразования
@@ -54,43 +40,10 @@ unsigned char alarm;
      unsigned char hourd_alar = 0b00110000;//десятки часов будильника после преобразования     
      unsigned char minee;//переменная для настройки минут 
      unsigned char houree;//переменная для настройки часов
-     //unsigned char minee_alar;//переменная для настройки минут 
-     //unsigned char houree_alar;//переменная для настройки часов
-     //unsigned char control_2;//переменная для настройки часов
-     //unsigned char Days;//переменная числа до преобразования
-     //unsigned char Daysset;//переменная для настройки числа
      unsigned char Weekdays;//переменная дня недели до преобразования
-     unsigned char Weekdaysset;//переменная для настройки дня недели
-     unsigned char Weekdays_pr;//переменная дня недели после преобразования
-     /*unsigned char Months;//переменная месяца до преобразования
-     unsigned char Monthsset;//переменная для настройки месяца
-     unsigned char Years;//переменная года до преобразования
-     unsigned char Yearsset;//переменная для настройки года
-     unsigned char Days_pre;//переменная числа после преобразования(единицы)
-     unsigned char Days_prd;//переменная числа после преобразования(десятки)
-     
-     unsigned char Months_pre;//переменная месяца после преобразования(единицы)
-     unsigned char Months_prd;//переменная месяца после преобразования(десятки)
-     //unsigned char Months_pr;//переменная месяца после преобразования
-     unsigned char Years_pre;//переменная года после преобразования(единицы)
-     unsigned char Years_prd;//переменная года после преобразования(десятки)*/
-//------------------------------------------------
-  //char str01[30]={'\0'};
-  //char str03[7]={'\0'};
 //------------------------------------------------------------------------------
 void DS1307init (void){//инициализация микросхемы
         __delay_ms(10);
-   // unsigned char control_3; 
-     /*   i2c_start();//отправка посылки СТАРТ
-      I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
-      I2C_SendByte (0b00000010);//вызов регистра секунд
-      i2c_stop ();//отправка посылки СТОП 
-      i2c_start ();//отправка посылки СТАРТ
-      I2C_SendByte (dev_addrr);//адрес часовой микросхемы - чтение
-      control_3 = I2C_ReadByte_last();//чтение регистра 
-      i2c_stop ();//
-      if (0b10000000 & control_3 ){  
-        */
         
     i2c_start ();//отправка посылки СТАРТ
     I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
@@ -99,13 +52,6 @@ void DS1307init (void){//инициализация микросхемы
     I2C_SendByte (0b01011001);//установка минут 00
     I2C_SendByte (0b00100011);//установка часов 00  0b00100011
     I2C_SendByte (0b00000110);//установка дня ВС
-    /*I2C_SendByte (0b00000001);//установка дня недели 1
-    I2C_SendByte (0b00000001);//установка месяца 1
-    I2C_SendByte (0b00100001);//установка года 21
-    I2C_SendByte (0b00000001);//установка будильника минуты 1
-    I2C_SendByte (0b00000000);//установка будильника часы 0
-    I2C_SendByte (0b00000000);//отключение будильника по дню недели 7 бит в единицу
-    I2C_SendByte (0b00000000);//отключение будильника по неделе 7 бит в единицу*/
     i2c_stop ();
     
     
@@ -114,7 +60,6 @@ void DS1307init (void){//инициализация микросхемы
     I2C_SendByte (0b00000111);//вызов регистра clock out
     I2C_SendByte (0b00010000);//включение делителя частоты 1Hz
     i2c_stop ();
-     // }
 }
 //------------------------------------------------------------------------------
 unsigned char RTC_ConvertFromDecd(unsigned char c,unsigned char v){//
@@ -130,29 +75,6 @@ unsigned char RTC_ConvertFromDecd(unsigned char c,unsigned char v){//
           c = c>>4;
        ch = (0b00000001&c);  
     }
-    
-   /* switch (v){
-        case 0:
-          ch = (c>>4);  
-            break;
-                    case 1:
-                  c = c>>4;
-       ch = (0b00000011&c); 
-            break;
-                    case 2:
-          ch = (0b00001111&c); ;  
-            break;
-    }
-    if (v==1) {
-        c = c>>4;
-       ch = (0b00000011&c);
-    }
-    if (v==0){
-       ch = (c>>4);  
-    }
-    if (v==2){
-       ch = (0b00001111&c);  
-    }*/
     return ch; 
 }
 //--------------------перевод из двоичного в единицы минут и часов--------------
@@ -247,15 +169,16 @@ void delay() //
 int i;
 for(i=0;i<19;i++);
 }
-//--------------------------------------------------
-void digit_out (unsigned char digit, unsigned char str1, unsigned char str2)
+//--------------------Вывод собственных символов на дисплей---------------------
+void digit_out (unsigned char digit, unsigned char str1/*, unsigned char str2*/)//digit - цифра от 1 до 9
+//str1- номер строки для вывода, сначала 1 потом 2
 {
 switch (digit){
     case 0:
 LCD_SetPos(str1,0);
 sendbyte(0b00000000,1);//0
 sendbyte(0b00000001,1);
-LCD_SetPos(str2,1);
+LCD_SetPos(str1,1);
 sendbyte(0b00000010,1);//0
 sendbyte(0b00000011,1);
         break;
@@ -263,7 +186,7 @@ sendbyte(0b00000011,1);
 LCD_SetPos(str1,0);
 sendbyte(0b00000001,1);//1
 sendbyte(0b00100000,1);
-LCD_SetPos(str2,1);
+LCD_SetPos(str1,1);
 sendbyte(0b00000011,1);//1
 sendbyte(0b00000110,1);
         break;
@@ -271,7 +194,7 @@ sendbyte(0b00000110,1);
 LCD_SetPos(str1,0);
 sendbyte(0b00000111,1);//2
 sendbyte(0b00000100,1);
-LCD_SetPos(str2,1);
+LCD_SetPos(str1,1);
 sendbyte(0b00000101,1);//2
 sendbyte(0b00000110,1);
         break;
@@ -279,7 +202,7 @@ sendbyte(0b00000110,1);
 LCD_SetPos(str1,0);
 sendbyte(0b00000111,1);//3
 sendbyte(0b00000100,1);
-LCD_SetPos(str2,1);
+LCD_SetPos(str1,1);
 sendbyte(0b00000110,1);//3
 sendbyte(0b00000011,1);
         break;
@@ -287,7 +210,7 @@ sendbyte(0b00000011,1);
 LCD_SetPos(str1,0);
 sendbyte(0b00000010,1);//4
 sendbyte(0b00000011,1);
-LCD_SetPos(str2,1);
+LCD_SetPos(str1,1);
 sendbyte(0b00100000,1);//4
 sendbyte(0b00000001,1);
         break;
@@ -295,7 +218,7 @@ sendbyte(0b00000001,1);
 LCD_SetPos(str1,0);
 sendbyte(0b00000101,1);//5
 sendbyte(0b00000111,1);
-LCD_SetPos(str2,1);
+LCD_SetPos(str1,1);
 sendbyte(0b00000110,1);//5
 sendbyte(0b00000100,1);
         break;
@@ -303,7 +226,7 @@ sendbyte(0b00000100,1);
 LCD_SetPos(str1,0);
 sendbyte(0b00000000,1);//6
 sendbyte(0b00100000,1);
-LCD_SetPos(str2,1);
+LCD_SetPos(str1,1);
 sendbyte(0b00000101,1);//6
 sendbyte(0b00000100,1);
         break;
@@ -311,7 +234,7 @@ sendbyte(0b00000100,1);
 LCD_SetPos(str1,0);
 sendbyte(0b00000111,1);//7
 sendbyte(0b00000001,1);
-LCD_SetPos(str2,1);
+LCD_SetPos(str1,1);
 sendbyte(0b00100000,1);//7
 sendbyte(0b00000001,1);
         break;
@@ -319,7 +242,7 @@ sendbyte(0b00000001,1);
 LCD_SetPos(str1,0);
 sendbyte(0b00000101,1);//8
 sendbyte(0b00000100,1);
-LCD_SetPos(str2,1);
+LCD_SetPos(str1,1);
 sendbyte(0b00000010,1);//8
 sendbyte(0b00000011,1);        
         break;
@@ -327,7 +250,7 @@ sendbyte(0b00000011,1);
 LCD_SetPos(str1,0);
 sendbyte(0b00000101,1);//9
 sendbyte(0b00000100,1);//
-LCD_SetPos(str2,1);
+LCD_SetPos(str1,1);
 sendbyte(0b00000110,1);//9
 sendbyte(0b00000011,1);
         break;        
@@ -354,15 +277,15 @@ unsigned char vyb_raz_h (unsigned char u){
     if (u == 0b00100011) houree = 0b00000000;//если больше 23 то обнуляем
 return houree;
 }
-//-----------------------переключение дня недели----------------------------
-/*unsigned char vyb_raz_DAY (unsigned char u){
-    houree = u;
-    houree ++;
-    if (u == 0b00001001) houree = 0b00010000;//если больше 9 то записываем в переменную 10
-    if (u == 0b00011001) houree = 0b00100000;//если больше 19 то записываем в переменную 20
-    if (u == 0b00100011) houree = 0b00000000;//если больше 23 то обнуляем
-return houree;
-}*/
+//-----------------------Отправка данных в микросхему DS1307--------------------
+void sending_data (unsigned char registerr, unsigned char data){//register - адрес регистра данных 
+//data - отправляемые данные    
+i2c_start ();//отправка посылки СТАРТ
+    I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
+    I2C_SendByte (registerr);//вызов регистра минут
+    I2C_SendByte (data);//установка минут
+    i2c_stop ();    
+}
 //-----------------------обработка нажатия кнопки (изменение значения)---------- 
 void button (unsigned char u,unsigned char i){
   unsigned int butcount=0;
@@ -373,36 +296,20 @@ void button (unsigned char u,unsigned char i){
       butcount++;
     }
     else
-    {
-       
-   if (i == 1){//настройка минут
+    {   
+    if (i == 1){//настройка минут
     vyb_raz (u);
-    i2c_start ();//отправка посылки СТАРТ
-    I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
-    I2C_SendByte (0b00000001);//вызов регистра минут
-    I2C_SendByte (minee);//установка минут
-    i2c_stop (); 
+    sending_data (0b00000001, minee);
     } 
     if (i == 2){//настройка часов
     vyb_raz_h (u);
-    i2c_start ();//отправка посылки СТАРТ
-    I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
-    I2C_SendByte (0b00000010);//вызов регистра часов
-    I2C_SendByte (houree);//установка часов
-    i2c_stop (); 
+    sending_data (0b00000010, houree);
     }
-       if (i == 3){//настройка дня недели
-           //Weekdays = u;
-           Weekdays ++;
-          // if (Weekdays > 0b00000110) Weekdays = 0;
-    i2c_start ();//отправка посылки СТАРТ
-    I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
-    I2C_SendByte (0b00000011);//вызов регистра дня недели
-    I2C_SendByte (Weekdays);//установка дня недели
-    i2c_stop ();
+    if (i == 3){//настройка дня недели
+    Weekdays ++;
+    sending_data (0b00000011, Weekdays); 
     }
          if (i == 4){//настройка будильника - часы
-
              alarm_2 ++;
                 if (alarm_1 == 0b00110010 && alarm_2 == 0b00110100){//если часы > 23, то равно 00 часов
                  alarm_1 = 0b00110000;
@@ -412,12 +319,10 @@ void button (unsigned char u,unsigned char i){
                  alarm_1 = 0b00110010;
                  alarm_2 = 0b00110000; 
              }
-
              if (alarm_2 > 0b00111001){//если часы > 09, то равно 10 часов
              alarm_1 = 0b00110001;
              alarm_2 = 0b00110000;
              } 
-             //hour_alar = (alarm_1<<4) & alarm_2;
     } 
           if (i == 5){//настройка будильника - минуты
             alarm_4 ++;
@@ -429,11 +334,8 @@ void button (unsigned char u,unsigned char i){
                 alarm_4 = 0b00110000;
                 alarm_3 = 0b00110000;//
             }
-             //min_alar = (alarm_3<<4) & alarm_4;          
-  
+
           }
-   
-   
  break;    
     }
   }
@@ -476,8 +378,11 @@ Weekdays = 0;
         break;        
 }    
 }
-void lcd_mask (unsigned int o){
-    sendbyte(0b10100000,1);//Б
+//-------------------Вывод надписей---
+void lcd_mask (unsigned char mask){
+switch (mask){
+    case 0:
+sendbyte(0b10100000,1);//Б
 sendbyte(0b01111001,1);//у
 sendbyte(0b11100011,1);//д
 sendbyte(0b10111000,1);//и
@@ -485,19 +390,28 @@ sendbyte(0b10111011,1);//л
 sendbyte(0b11000100,1);//ь
 sendbyte(0b10111101,1);//н
 sendbyte(0b10111000,1);//и
-sendbyte(0b10111010,1);//к
-LCD_SetPos(14,0);
-sendbyte(0b11101101,1);
-sendbyte(o,1);
+sendbyte(0b10111010,1);//к       
+break;
+    case 1:
+sendbyte(0b10101011,1);//Ч
+sendbyte(0b01100001,1);//а
+sendbyte(0b01100011,1);//с
+sendbyte(0b11000011,1);//ы
+break;
+    case 2:
+sendbyte(0b01001101,1);//М
+sendbyte(0b10111000,1);//и
+sendbyte(0b10111101,1);//н
+sendbyte(0b01111001,1);//у
+sendbyte(0b10111111,1);//т
+sendbyte(0b11000011,1);//ы
+break;
+}      
+
 }
-//-------------------Настройка времени будильника---
-/*void alarm_clock (unsigned char time){
-    
-}*/
 //--------------------------------------------------
 void clk_out (void){//
     unsigned int butcount = 0;
-
  while(!RA1)
   { 
  if(butcount < 4000)
@@ -510,35 +424,24 @@ void clk_out (void){//
   t++;
         if (t > 5) t = 0;//установка флага режима настройки
       break;     
-    }
-// break;    
+    }   
     }    
-//--------------Первое нажатие настройка минут------
-     
-    if (t == 1){
+//--------------Первое нажатие настройка минут------    
+if (t == 1){
 button(min,1);
-digit_out(mind, 5, 5);
-digit_out(mine, 7, 7);
+digit_out(mind, 5);
+digit_out(mine, 7);
 LCD_SetPos(10,1);
-sendbyte(0b01001101,1);//М
-sendbyte(0b10111000,1);//и
-sendbyte(0b10111101,1);//н
-sendbyte(0b01111001,1);//у
-sendbyte(0b10111111,1);//т
-sendbyte(0b11000011,1);//ы
+lcd_mask(2);//вывод слова "Минуты"
     }
 //--------------Второе нажатие настройка часа-------
     if (t == 2){
         n = 0;
+        LCD_SetPos(5,1);
+        lcd_mask (1);//вывод слова "Часы"
 button(hour,2);
-digit_out(hourd, 0, 0);//hourd
-digit_out(houre, 2, 2);//houre
-LCD_SetPos(5,1);
-//sendbyte(0b11011111,1);
-sendbyte(0b10101011,1);//Ч
-sendbyte(0b01100001,1);//а
-sendbyte(0b01100011,1);//с
-sendbyte(0b11000011,1);//ы
+digit_out(hourd, 0);//hourd
+digit_out(houre, 2);//houre
     }
     //--------------Третье нажатие настройка дня недели-------
     if (t == 3){
@@ -563,102 +466,71 @@ sendbyte(DAY_2,1);
     if (t == 4){
 button(hour_alar,4);
         LCD_SetPos(0,0);
-sendbyte(0b10100000,1);//Б
-sendbyte(0b01111001,1);//у
-sendbyte(0b11100011,1);//д
-sendbyte(0b10111000,1);//и
-sendbyte(0b10111011,1);//л
-sendbyte(0b11000100,1);//ь
-sendbyte(0b10111101,1);//н
-sendbyte(0b10111000,1);//и
-sendbyte(0b10111010,1);//к
+lcd_mask(0);//вывод слова "Будильник"
 LCD_SetPos(14,0);
 sendbyte(0b11101101,1);
 sendbyte(0b11111111,1);
         LCD_SetPos(0,1);
-sendbyte(0b10101011,1);//Ч
-sendbyte(0b01100001,1);//а
-sendbyte(0b01100011,1);//с
-sendbyte(0b11000011,1);//ы
+lcd_mask (1);
         LCD_SetPos(5,1);
         sendbyte(alarm_1,1);
-        sendbyte(alarm_2,1);
-        
-       
-      
-            
+        sendbyte(alarm_2,1);    
      }
 //--------------Пятое нажатие настройка будильника №2-------
     if (t == 5){
         button(alarm_number,5);
-        LCD_SetPos(0,0);  
-sendbyte(0b10100000,1);//Б
-sendbyte(0b01111001,1);//у
-sendbyte(0b11100011,1);//д
-sendbyte(0b10111000,1);//и
-sendbyte(0b10111011,1);//л
-sendbyte(0b11000100,1);//ь
-sendbyte(0b10111101,1);//н
-sendbyte(0b10111000,1);//и
-sendbyte(0b10111010,1);//к
+        LCD_SetPos(0,0);
+lcd_mask(0);//вывод слова "Будильник"
 LCD_SetPos(14,0);
 sendbyte(0b11101101,1);
 sendbyte(0b11111111,1);
         LCD_SetPos(0,1);
-sendbyte(0b01001101,1);//М
-sendbyte(0b10111000,1);//и
-sendbyte(0b10111101,1);//н
-sendbyte(0b01111001,1);//у
-sendbyte(0b10111111,1);//т
-sendbyte(0b11000011,1);//ы
+lcd_mask(2);//вывод слова "Минуты"        
         LCD_SetPos(7,1);
         sendbyte(alarm_3,1);
         sendbyte(alarm_4,1);
 
-    }/*
-//--------------шестое нажатие настройка будильника №3-------
-    if (t == 6){
-        alarm_number = 0b00110011;
-        lcd_mask (alarm_number);
-RA3 = 1;
     }
-//--------------Седьмое нажатие настройка будильника №4-------
-    if (t == 7){
-        alarm_number = 0b00110100;
-        lcd_mask (alarm_number);
-
-    }
-//--------------Восьмое нажатие настройка будильника №5-------
-    if (t == 8){
-        alarm_number = 0b00110101;
-        lcd_mask (alarm_number);
-        RA3 = 0;
-    }*/  
-
 //--------------Вывод на дисплей--------------------
 if (t == 0){
     Day_Switch ();
     if (Weekdays > 0b00000110) Weekdays = 0;
-digit_out(hourd, 0, 0);//hourd
-digit_out(houre, 2, 2);//houre
+digit_out(hourd, 0);//hourd
+digit_out(houre, 2);//houre
 LCD_SetPos(4,0);
 sendbyte(0b00101110,1);
 LCD_SetPos(4,1);
 sendbyte(0b11011111,1);
-digit_out(mind, 5, 5);
-digit_out(mine, 7, 7);
+digit_out(mind, 5);
+digit_out(mine, 7);
 LCD_SetPos(9,0);
 sendbyte(0b00101110,1);
 LCD_SetPos(9,1);
 sendbyte(0b11011111,1);
-digit_out(secd, 10, 10);
-digit_out(sece, 12, 12);
+digit_out(secd, 10);
+digit_out(sece, 12);
 LCD_SetPos(14,0);
 sendbyte(0b11101101,1);
 sendbyte(alarm_number,1);
 LCD_SetPos(14,1);
 sendbyte(DAY_1,1);//
 sendbyte(DAY_2,1);//
+}
+}
+//--------------------------------------------------
+/*
+void sets_CGRAM (void){
+unsigned char x;
+char* pot;
+  for (x = 0; x <= 7; x++){
+    sendbyte(pot[x],1);
+}
+}*/
+//--------------------------------------------------
+void sets_CGRAM (char* pot){
+unsigned char x;
+  for (x = 0; x <= 7; x++){
+    sendbyte(pot[x],1);
 }
 }
 //--------------------------------------------------
@@ -673,14 +545,26 @@ PCFG2 = 1;//0100 AN7:AN1 ?????, AN0 ??????, ??????? = Vdd, ?????- = Vss
 PCFG1 = 1;
 PCFG0 = 0;//1
 
-
-
 DS1307init();
 __delay_us(40);
 LCD_Init();
 __delay_us(40);
-unsigned char x;
+//unsigned char x;
   sendbyte(0b01000000,0);//sets CGRAM address
+  
+ 
+  sets_CGRAM (str01);
+  sets_CGRAM (str02);
+  sets_CGRAM (str03);
+  sets_CGRAM (str04);
+  sets_CGRAM (str05);
+  sets_CGRAM (str06);
+  sets_CGRAM (str07);
+  sets_CGRAM (str08);
+   
+  /*
+   
+
   for (x = 0; x <= 7; x++){
     sendbyte(str01[x],1);
 }
@@ -712,7 +596,7 @@ unsigned char x;
     for (x = 0; x<= 7; x++){
     sendbyte(str08[x],1);
 }
-
+   */
 sendbyte(0b00000001,0);//очистка дисплея*/
 //----------------------------------------
 while(1)
