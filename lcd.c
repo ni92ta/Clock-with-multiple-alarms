@@ -141,7 +141,7 @@ break;
 }
 }
 //--------------------------------------------------------------
-void LCD_String(char* st)//
+/*void LCD_String(char* st)//
 {
 unsigned char i = 0;
 while(st[i] != 0) //
@@ -149,7 +149,7 @@ while(st[i] != 0) //
 sendbyte(st[i],1); //
 i++;
 }
-}
+}*/
 //--------------------------------------------------------------
 /*
  void sendbyte(unsigned char c, unsigned char mode) //
