@@ -43,7 +43,7 @@ unsigned char alarm_number = 0b00110001;
      unsigned char Weekdays;//переменная дня недели до преобразования
 //------------------------------------------------------------------------------
 void DS1307init (void){//инициализация микросхемы
-        __delay_ms(10);
+       // __delay_ms(10);
         
     i2c_start ();//отправка посылки СТАРТ
     I2C_SendByte (dev_addrw);//адрес часовой микросхемы - запись
@@ -164,10 +164,12 @@ unsigned char RTC_ConvertFromDec(unsigned char c){//
                 0b00000000
   };
 //----------------------------------------------------
-void delay() //
+void delay(unsigned char pl) //
 {
-int i;
-for(i=0;i<19;i++);
+unsigned char i;
+for(i = 0; i <= pl; i++){
+    __delay_ms(10);
+}
 }
 //--------------------Вывод собственных символов на дисплей---------------------
 void digit_out (unsigned char digit, unsigned char str1/*, unsigned char str2*/)//digit - цифра от 1 до 9
@@ -546,10 +548,9 @@ PCFG1 = 1;
 PCFG0 = 0;//1
 
 DS1307init();
-__delay_us(40);
+//__delay_us(40);
 LCD_Init();
-__delay_us(40);
-//unsigned char x;
+//__delay_us(40);
   sendbyte(0b01000000,0);//sets CGRAM address
   
  
